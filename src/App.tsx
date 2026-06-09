@@ -62,32 +62,27 @@ type IptvGuideJson = {
 
 type GuideValueList = Array<{ value?: string } | string>
 
-const DEFAULT_EPG_URL = import.meta.env.VITE_EPG_URL || '/epg/br-priority.json'
+const DEFAULT_EPG_URL = import.meta.env.VITE_EPG_URL || '/api/br-epg?source=br-priority'
 const brazilianSources = [
   {
     name: 'Brasil prioritario',
-    guideUrl: '/epg/br-priority.json',
-    detail: 'Gerado com fontes BR em ordem de cobertura',
+    guideUrl: '/api/br-epg?source=br-priority',
+    detail: 'mi.tv Brasil com canais abertos, esportes, filmes e noticias',
   },
   {
-    name: 'mi.tv BR',
-    guideUrl: '/epg/mi-tv-br.json',
-    detail: 'Arquivo mi.tv_br.channels.xml',
+    name: 'TV aberta BR',
+    guideUrl: '/api/br-epg?source=open-tv',
+    detail: 'Globo, SBT, Record, Band, Cultura e redes abertas',
   },
   {
-    name: 'Claro BR',
-    guideUrl: '/epg/claro-br.json',
-    detail: 'claro.com.br + clarotvmais.com.br',
+    name: 'Esportes BR',
+    guideUrl: '/api/br-epg?source=sports',
+    detail: 'SporTV, ESPN, Premiere e canais esportivos',
   },
   {
-    name: 'Meu Guia TV',
-    guideUrl: '/epg/meuguia-br.json',
-    detail: 'meuguia.tv.channels.xml',
-  },
-  {
-    name: 'Guia de TV',
-    guideUrl: '/epg/guiadetv-br.json',
-    detail: 'guiadetv.com.channels.xml',
+    name: 'Filmes BR',
+    guideUrl: '/api/br-epg?source=movies',
+    detail: 'Telecine, TNT, Warner, Megapix e canais de cinema',
   },
 ]
 const guideStart = 12 * 60
@@ -228,6 +223,17 @@ function App() {
     })
   }, [category, programs, query])
 
+  const visibleRows = useMemo(() => {
+    const rows = new Map<string, Program[]>()
+    visiblePrograms.forEach((program) => {
+      const current = rows.get(program.channelId) ?? []
+      current.push(program)
+      rows.set(program.channelId, current)
+    })
+
+    return [...rows.values()].map((row) => row.sort((a, b) => a.startMs - b.startMs))
+  }, [visiblePrograms])
+
   const selected = programs.find((program) => program.id === selectedId) ?? visiblePrograms[0] ?? programs[0]
   const recommendations = useMemo(() => buildRecommendations(programs), [programs])
 
@@ -323,39 +329,50 @@ function App() {
           </div>
 
           <div className="schedule-list">
-            {visiblePrograms.map((program) => {
-              const left = ((timeToGuideMinute(program.start) - guideStart) / guideSpan) * 100
-              const width = (duration(program.start, program.end) / guideSpan) * 100
+            {visibleRows.map((row) => {
+              const channel = row[0]
 
               return (
-                <button
-                  className={program.id === selected.id ? 'schedule-row selected' : 'schedule-row'}
-                  key={program.id}
-                  onClick={() => setSelectedId(program.id)}
-                  type="button"
+                <div
+                  className={row.some((program) => program.id === selected.id) ? 'schedule-row selected' : 'schedule-row'}
+                  key={channel.channelId}
                 >
                   <span className="channel-pill">
-                    <span className="logo-dot">{program.logo}</span>
+                    <span className="logo-dot">{channel.logo}</span>
                     <span>
-                      <strong>{program.channel}</strong>
-                      <small>{program.channelType}</small>
+                      <strong>{channel.channel}</strong>
+                      <small>{channel.channelType}</small>
                     </span>
                   </span>
                   <span className="timeline">
-                    <span
-                      className={`program-block ${program.category.toLowerCase()}`}
-                      style={{ left: `${Math.max(0, left)}%`, width: `${Math.max(10, Math.min(100, width))}%` }}
-                    >
-                      <span className="program-time">
-                        {program.start} - {program.end}
-                      </span>
-                      <span className="program-title">{program.title}</span>
-                      <span className="program-meta">
-                        {program.live ? 'Ao vivo' : program.subtitle} - {program.rating}
-                      </span>
-                    </span>
+                    {row.map((program) => {
+                      const left = ((timeToGuideMinute(program.start) - guideStart) / guideSpan) * 100
+                      const width = (duration(program.start, program.end) / guideSpan) * 100
+
+                      return (
+                        <button
+                          className={
+                            program.id === selected.id
+                              ? `program-block selected ${program.category.toLowerCase()}`
+                              : `program-block ${program.category.toLowerCase()}`
+                          }
+                          key={program.id}
+                          onClick={() => setSelectedId(program.id)}
+                          style={{ left: `${Math.max(0, left)}%`, width: `${Math.max(10, Math.min(100, width))}%` }}
+                          type="button"
+                        >
+                          <span className="program-time">
+                            {program.start} - {program.end}
+                          </span>
+                          <span className="program-title">{program.title}</span>
+                          <span className="program-meta">
+                            {program.live ? 'Ao vivo' : program.subtitle} - {program.rating}
+                          </span>
+                        </button>
+                      )
+                    })}
                   </span>
-                </button>
+                </div>
               )
             })}
           </div>
@@ -438,7 +455,7 @@ async function fetchGuide(url: string): Promise<Program[]> {
   return buildNextAirings(programs)
     .filter((program) => Number.isFinite(program.startMs) && Number.isFinite(program.endMs))
     .sort((a, b) => a.channel.localeCompare(b.channel) || a.startMs - b.startMs)
-    .slice(0, 180)
+    .slice(0, 1000)
 }
 
 function readGuideError(error: unknown) {

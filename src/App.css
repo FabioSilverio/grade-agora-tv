@@ -75,7 +75,7 @@
 .date-button,
 .search-box,
 .segment,
-.schedule-row,
+.program-block,
 .recommendation {
   font: inherit;
 }
@@ -402,6 +402,12 @@
   border-radius: 8px;
   background: #eaf8f6;
   color: #092f2b;
+  text-align: left;
+  cursor: pointer;
+}
+
+.program-block.selected {
+  box-shadow: 0 0 0 3px rgba(10, 148, 136, 0.18);
 }
 
 .program-block.esportes {

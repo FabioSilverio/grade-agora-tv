@@ -15,14 +15,14 @@ Aplicativo web para ver programacoes de TV aberta e fechada em uma guia de horar
 
 O app prioriza fontes brasileiras do projeto `iptv-org/epg`.
 
-A fonte padrao e `/epg/br-priority.json`, gerada pelo workflow `.github/workflows/update-epg.yml` a partir de `sites/mi.tv/mi.tv_br.channels.xml`. Tambem existem presets para:
+A fonte padrao e `/api/br-epg?source=br-priority`, que consulta em tempo real os canais brasileiros listados em `sites/mi.tv/mi.tv_br.channels.xml`. Existem presets para:
 
-- `mi.tv_br.channels.xml`
-- `claro.com.br.channels.xml`
-- `meuguia.tv.channels.xml`
-- `guiadetv.com.channels.xml`
+- Brasil prioritario
+- TV aberta BR
+- Esportes BR
+- Filmes BR
 
-Essas fontes sao brasileiras/portugues do Brasil e entram antes de qualquer fonte global. Se o arquivo local ainda nao existir, ou se a fonte externa falhar, o app usa dados demonstrativos para continuar navegavel.
+Essas fontes sao brasileiras/portugues do Brasil e entram antes de qualquer fonte global. Se a fonte externa falhar, o app usa dados demonstrativos para continuar navegavel.
 
 A estrutura esperada por programa e:
 
@@ -52,6 +52,6 @@ npm run build
 vercel --prod
 ```
 
-## Atualizar o EPG brasileiro
+## Atualizar o EPG brasileiro estatico
 
-No GitHub, rode manualmente o workflow **Update Brazilian EPG** ou espere a rotina diaria. Ele baixa o `iptv-org/epg`, gera os arquivos em `public/epg/` e commita os dados atualizados.
+Opcionalmente, no GitHub, rode manualmente o workflow **Update Brazilian EPG** ou espere a rotina diaria. Ele baixa o `iptv-org/epg`, gera arquivos em `public/epg/` e commita os dados atualizados. O app nao depende mais desse arquivo para mostrar a grade inicial.
