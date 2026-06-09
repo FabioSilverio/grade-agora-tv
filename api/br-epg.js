@@ -1,28 +1,11 @@
 const CHANNELS_URL = 'https://raw.githubusercontent.com/iptv-org/epg/master/sites/mi.tv/mi.tv_br.channels.xml'
 
 const PROFILES = {
-  'br-priority': [
-    /globo/i,
-    /sbt/i,
-    /record/i,
-    /^band$/i,
-    /cultura/i,
-    /sportv/i,
-    /espn/i,
-    /premiere/i,
-    /telecine/i,
-    /^tnt$/i,
-    /warner/i,
-    /globo news/i,
-    /cnn brasil/i,
-    /bandnews/i,
-    /canal brasil/i,
-    /gnt/i,
-    /multishow/i,
-  ],
-  'open-tv': [/globo/i, /sbt/i, /record/i, /^band$/i, /cultura/i, /rede tv/i, /gazeta/i, /futura/i],
-  sports: [/sportv/i, /espn/i, /premiere/i, /band sports/i, /combate/i, /canal off/i],
-  movies: [/telecine/i, /^tnt$/i, /warner/i, /megapix/i, /canal brasil/i, /space/i, /cinemax/i],
+  'pay-tv': { mode: 'pay-tv', limit: 120 },
+  'br-priority': { mode: 'pay-tv', limit: 80 },
+  'open-tv': { mode: 'patterns', limit: 60, patterns: [/globo/i, /sbt/i, /record/i, /^band$/i, /cultura/i, /rede tv/i, /gazeta/i, /futura/i] },
+  sports: { mode: 'patterns', limit: 80, patterns: [/sportv/i, /espn/i, /premiere/i, /band sports/i, /bandsports/i, /combate/i, /canal off/i, /fox sports/i, /golf/i] },
+  movies: { mode: 'patterns', limit: 80, patterns: [/telecine/i, /^tnt$/i, /warner/i, /megapix/i, /canal brasil/i, /space/i, /cinemax/i, /hbo/i, /paramount/i, /studio universal/i, /universal tv/i, /sony/i, /axn/i, /amc/i] },
 }
 
 export default async function handler(request, response) {
@@ -32,7 +15,7 @@ export default async function handler(request, response) {
 
   try {
     const channels = await loadBrazilianChannels(profile)
-    const selectedChannels = channels.slice(0, 28)
+    const selectedChannels = channels.slice(0, profile.limit)
     const programs = []
 
     await Promise.all(
@@ -76,7 +59,7 @@ async function loadBrazilianChannels(profile) {
     const siteId = attrs.site_id || ''
     const id = siteId.split('#')[1]
 
-    if (!id || !profile.some((pattern) => pattern.test(name))) continue
+    if (!id || !shouldUseChannel(name, profile)) continue
 
     channels.push({
       id,
@@ -88,6 +71,32 @@ async function loadBrazilianChannels(profile) {
   }
 
   return dedupeChannels(channels)
+}
+
+function shouldUseChannel(name, profile) {
+  if (/\$nameFromProvider/i.test(name)) return false
+  if (profile.mode === 'pay-tv') return isPayTvChannel(name)
+  return profile.patterns.some((pattern) => pattern.test(name))
+}
+
+function isPayTvChannel(name) {
+  const normalized = normalize(name)
+
+  if (/(adulto|hustler|playboy|sexy|sexpriv[eé]|venus|private)/.test(normalized)) return false
+  if (/(assembleia|camara|senado|justica|legislativo|universit|tval|tv uf|furb tv)/.test(normalized)) return false
+  if (/(cancao nova|aparecida|boa vontade|rede vida|pai eterno|rit|rbi|nazare|ewtn)/.test(normalized)) return false
+  if (/(shop|polishop|shoptime|mega tv|ideal tv)/.test(normalized)) return false
+
+  if (/(bandnews|bandsports|band sports)/.test(normalized)) return true
+
+  const openOrLocal =
+    /(^|\b)(globo|sbt|record|rede tv|gazeta|cultura|tv brasil|cnt|futura)(\b|$)/.test(normalized) ||
+    /^band(?!news|sports| sports)/.test(normalized) ||
+    /(eptv|intertv|nsc tv|rbs tv|rpc|tv anhanguera|tv bahia|tv tem|tv tribuna|verdes mares|vanguarda|mirante|liberal|fronteira|cabugi|planicie|serra mar|alto litoral|roraima|piaui|maranhao|goiania|maceio|belem|manaus|amazonas|nordeste|brasilia|curitiba|campinas|ribeirao|chapeco|criciuma|florianopolis|joinville|porto alegre|rio grande|belo horizonte|natal|recife)/.test(
+      normalized,
+    )
+
+  return !openOrLocal
 }
 
 async function loadMiTvPrograms(channel, date, channelIndex) {
@@ -151,11 +160,21 @@ function parseAttrs(value) {
 function dedupeChannels(channels) {
   const seen = new Set()
   return channels.filter((channel) => {
-    const key = channel.name.toLowerCase().replace(/\s+hd$/i, '')
+    const key = normalize(channel.name).replace(/\s+(hd|sd)$/i, '').replace(/\s+brazil$/i, '')
     if (seen.has(key)) return false
     seen.add(key)
     return true
   })
+}
+
+function normalize(value) {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, 'e')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function saoPauloDate() {

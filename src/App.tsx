@@ -62,12 +62,17 @@ type IptvGuideJson = {
 
 type GuideValueList = Array<{ value?: string } | string>
 
-const DEFAULT_EPG_URL = import.meta.env.VITE_EPG_URL || '/api/br-epg?source=br-priority'
+const DEFAULT_EPG_URL = import.meta.env.VITE_EPG_URL || '/api/br-epg?source=pay-tv'
 const brazilianSources = [
+  {
+    name: 'TV fechada BR',
+    guideUrl: '/api/br-epg?source=pay-tv',
+    detail: 'Canais fechados brasileiros do mi.tv, sem afiliadas abertas',
+  },
   {
     name: 'Brasil prioritario',
     guideUrl: '/api/br-epg?source=br-priority',
-    detail: 'mi.tv Brasil com canais abertos, esportes, filmes e noticias',
+    detail: 'Grade menor com canais fechados populares',
   },
   {
     name: 'TV aberta BR',
@@ -455,7 +460,7 @@ async function fetchGuide(url: string): Promise<Program[]> {
   return buildNextAirings(programs)
     .filter((program) => Number.isFinite(program.startMs) && Number.isFinite(program.endMs))
     .sort((a, b) => a.channel.localeCompare(b.channel) || a.startMs - b.startMs)
-    .slice(0, 1000)
+    .slice(0, 5000)
 }
 
 function readGuideError(error: unknown) {
