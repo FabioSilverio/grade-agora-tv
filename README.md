@@ -13,7 +13,16 @@ Aplicativo web para ver programacoes de TV aberta e fechada em uma guia de horar
 
 ## Dados de programacao
 
-Esta versao usa dados demonstrativos em `src/App.tsx`. Para cobrir "todos os canais" em producao, o caminho correto e ligar um provedor de EPG licenciado, por exemplo Gracenote/Nielsen, TV Media, JustWatch/Guidebox quando aplicavel, APIs de operadoras ou outro fornecedor contratado.
+O app prioriza fontes brasileiras do projeto `iptv-org/epg`.
+
+A fonte padrao e `/epg/br-priority.json`, gerada pelo workflow `.github/workflows/update-epg.yml` a partir de `sites/mi.tv/mi.tv_br.channels.xml`. Tambem existem presets para:
+
+- `mi.tv_br.channels.xml`
+- `claro.com.br.channels.xml`
+- `meuguia.tv.channels.xml`
+- `guiadetv.com.channels.xml`
+
+Essas fontes sao brasileiras/portugues do Brasil e entram antes de qualquer fonte global. Se o arquivo local ainda nao existir, ou se a fonte externa falhar, o app usa dados demonstrativos para continuar navegavel.
 
 A estrutura esperada por programa e:
 
@@ -42,3 +51,7 @@ npm run dev
 npm run build
 vercel --prod
 ```
+
+## Atualizar o EPG brasileiro
+
+No GitHub, rode manualmente o workflow **Update Brazilian EPG** ou espere a rotina diaria. Ele baixa o `iptv-org/epg`, gera os arquivos em `public/epg/` e commita os dados atualizados.

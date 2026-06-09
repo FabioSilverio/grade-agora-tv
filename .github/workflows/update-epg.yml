@@ -1,0 +1,59 @@
+name: Update Brazilian EPG
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 8 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout app
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Checkout iptv-org EPG
+        uses: actions/checkout@v4
+        with:
+          repository: iptv-org/epg
+          path: .cache/iptv-epg
+          fetch-depth: 1
+
+      - name: Install iptv-org EPG dependencies
+        working-directory: .cache/iptv-epg
+        run: npm ci
+
+      - name: Generate prioritized Brazil guide
+        working-directory: .cache/iptv-epg
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/public/epg"
+          npm run grab --- \
+            --channels=sites/mi.tv/mi.tv_br.channels.xml \
+            --output="$GITHUB_WORKSPACE/public/epg/br-priority.xml" \
+            --json="$GITHUB_WORKSPACE/public/epg/br-priority.json" \
+            --days=2 \
+            --maxConnections=3 \
+            --timeout=30000
+
+      - name: Generate secondary Brazilian guides
+        working-directory: .cache/iptv-epg
+        continue-on-error: true
+        run: |
+          npm run grab --- --channels=sites/mi.tv/mi.tv_br.channels.xml --output="$GITHUB_WORKSPACE/public/epg/mi-tv-br.xml" --json="$GITHUB_WORKSPACE/public/epg/mi-tv-br.json" --days=2 --maxConnections=3 --timeout=30000
+          npm run grab --- --channels=sites/claro.com.br/claro.com.br.channels.xml --output="$GITHUB_WORKSPACE/public/epg/claro-br.xml" --json="$GITHUB_WORKSPACE/public/epg/claro-br.json" --days=2 --maxConnections=2 --timeout=30000
+          npm run grab --- --channels=sites/meuguia.tv/meuguia.tv.channels.xml --output="$GITHUB_WORKSPACE/public/epg/meuguia-br.xml" --json="$GITHUB_WORKSPACE/public/epg/meuguia-br.json" --days=2 --maxConnections=2 --timeout=30000
+          npm run grab --- --channels=sites/guiadetv.com/guiadetv.com.channels.xml --output="$GITHUB_WORKSPACE/public/epg/guiadetv-br.xml" --json="$GITHUB_WORKSPACE/public/epg/guiadetv-br.json" --days=2 --maxConnections=2 --timeout=30000
+
+      - name: Commit EPG update
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: Update Brazilian EPG data
+          file_pattern: public/epg/*.json public/epg/*.xml
