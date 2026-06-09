@@ -90,9 +90,8 @@ const brazilianSources = [
     detail: 'Telecine, TNT, Warner, Megapix e canais de cinema',
   },
 ]
-const guideStart = 12 * 60
-const guideSpan = 12 * 60
-const timeSlots = ['12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '00:00']
+const guideSpanHours = 6
+const guideSpanMs = guideSpanHours * 60 * 60 * 1000
 const categories: Category[] = ['Todos', 'Aberta', 'Esportes', 'Filmes', 'Series', 'Noticias']
 
 const fallbackPrograms: Program[] = [
@@ -158,6 +157,12 @@ function App() {
   const [programs, setPrograms] = useState(fallbackPrograms)
   const [guideStatus, setGuideStatus] = useState<GuideStatus>('idle')
   const [guideMessage, setGuideMessage] = useState('Dados demonstrativos carregados.')
+  const [windowStartMs, setWindowStartMs] = useState(() => Date.now())
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setWindowStartMs(Date.now()), 60 * 1000)
+    return () => window.clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     async function loadInitialGuide() {
@@ -224,9 +229,9 @@ function App() {
         category === 'Todos' ||
         (category === 'Aberta' ? program.channelType === 'Aberta' : program.category === category)
 
-      return matchesQuery && matchesCategory && overlapsGuideWindow(program)
+      return matchesQuery && matchesCategory && overlapsGuideWindow(program, windowStartMs)
     })
-  }, [category, programs, query])
+  }, [category, programs, query, windowStartMs])
 
   const visibleRows = useMemo(() => {
     const rows = new Map<string, Program[]>()
@@ -241,6 +246,7 @@ function App() {
 
   const selected = programs.find((program) => program.id === selectedId) ?? visiblePrograms[0] ?? programs[0]
   const recommendations = useMemo(() => buildRecommendations(programs), [programs])
+  const timeSlots = useMemo(() => buildTimeSlots(windowStartMs), [windowStartMs])
 
   return (
     <main className="app-shell">
@@ -350,20 +356,20 @@ function App() {
                     </span>
                   </span>
                   <span className="timeline">
+                    <span className="now-line" aria-hidden="true" />
                     {row.map((program) => {
-                      const left = ((timeToGuideMinute(program.start) - guideStart) / guideSpan) * 100
-                      const width = (duration(program.start, program.end) / guideSpan) * 100
+                      const block = blockPosition(program, windowStartMs)
 
                       return (
                         <button
                           className={
                             program.id === selected.id
-                              ? `program-block selected ${program.category.toLowerCase()}`
-                              : `program-block ${program.category.toLowerCase()}`
+                              ? `program-block selected ${program.live ? 'live' : ''} ${program.category.toLowerCase()}`
+                              : `program-block ${program.live ? 'live' : ''} ${program.category.toLowerCase()}`
                           }
                           key={program.id}
                           onClick={() => setSelectedId(program.id)}
-                          style={{ left: `${Math.max(0, left)}%`, width: `${Math.max(10, Math.min(100, width))}%` }}
+                          style={{ left: `${block.left}%`, width: `${block.width}%` }}
                           type="button"
                         >
                           <span className="program-time">
@@ -609,34 +615,37 @@ function inferCategory(text: string): ProgramCategory {
 }
 
 function inferChannelType(channel: string): Program['channelType'] {
-  return /globo|sbt|record|band|cultura|rede tv|redevida|gazeta/i.test(channel) ? 'Aberta' : 'Fechada'
+  if (/globosat|globo news|gloob/i.test(channel)) return 'Fechada'
+  return /(^|\s)(globo|sbt|record|band|cultura|rede tv|redevida|gazeta)(\s|$)/i.test(channel) ? 'Aberta' : 'Fechada'
 }
 
 function isRecommendation(title: string, category: ProgramCategory) {
   return category === 'Esportes' || category === 'Filmes' || /futebol|brasileirao|libertadores|copa/i.test(title)
 }
 
-function overlapsGuideWindow(program: Program) {
-  const start = timeToGuideMinute(program.start)
-  const end = timeToGuideMinute(program.end)
-  const normalizedEnd = end <= start ? end + 24 * 60 : end
-  return normalizedEnd > guideStart && start < guideStart + guideSpan
+function overlapsGuideWindow(program: Program, windowStartMs: number) {
+  const windowEndMs = windowStartMs + guideSpanMs
+  return program.endMs > windowStartMs && program.startMs < windowEndMs
 }
 
-function timeToGuideMinute(time: string) {
-  const value = minutes(time)
-  return value < guideStart ? value + 24 * 60 : value
+function blockPosition(program: Program, windowStartMs: number) {
+  const windowEndMs = windowStartMs + guideSpanMs
+  const visibleStart = Math.max(program.startMs, windowStartMs)
+  const visibleEnd = Math.min(program.endMs, windowEndMs)
+  const left = ((visibleStart - windowStartMs) / guideSpanMs) * 100
+  const width = ((visibleEnd - visibleStart) / guideSpanMs) * 100
+
+  return {
+    left: Math.max(0, Math.min(100, left)),
+    width: Math.max(4, Math.min(100 - left, width)),
+  }
 }
 
-function minutes(time: string) {
-  const [hour, minute] = time.split(':').map(Number)
-  return hour * 60 + minute
-}
-
-function duration(start: string, end: string) {
-  const startMinutes = timeToGuideMinute(start)
-  const endMinutes = timeToGuideMinute(end)
-  return endMinutes >= startMinutes ? endMinutes - startMinutes : endMinutes + 24 * 60 - startMinutes
+function buildTimeSlots(windowStartMs: number) {
+  return Array.from({ length: guideSpanHours + 1 }, (_, index) => {
+    const date = new Date(windowStartMs + index * 60 * 60 * 1000)
+    return index === 0 ? `Agora ${formatTime(date)}` : formatTime(date)
+  })
 }
 
 function dateAt(date: Date, time: string) {
