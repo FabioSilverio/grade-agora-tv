@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260610">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260611">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,72 +272,4 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
-<programme start="20260611133000 +0000" stop="20260611134500 +0000" channel="1_409"><title lang="pt">Business Today - NYSE Opening Bell</title></programme>
-<programme start="20260611134500 +0000" stop="20260611140000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
-<programme start="20260611140000 +0000" stop="20260611153000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
-<programme start="20260611153000 +0000" stop="20260611154500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260611154500 +0000" stop="20260611163000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
-<programme start="20260611163000 +0000" stop="20260611170000 +0000" channel="1_409"><title lang="pt">Focus on Africa</title></programme>
-<programme start="20260611170000 +0000" stop="20260611190000 +0000" channel="1_409"><title lang="pt">The World Today with Maryam Moshiri</title></programme>
-<programme start="20260611190000 +0000" stop="20260611200000 +0000" channel="1_409"><title lang="pt">The Context USA</title></programme>
-<programme start="20260611200000 +0000" stop="20260611210000 +0000" channel="1_409"><title lang="pt">The Context</title></programme>
-<programme start="20260611210000 +0000" stop="20260611213000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
-<programme start="20260611213000 +0000" stop="20260611220000 +0000" channel="1_409"><title lang="pt">Newsnight</title></programme>
-<programme start="20260611220000 +0000" stop="20260611230000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
-<programme start="20260611230000 +0000" stop="20260611233000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260611233000 +0000" stop="20260612000000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
-<programme start="20260612000000 +0000" stop="20260612003000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612003000 +0000" stop="20260612010000 +0000" channel="1_409"><title lang="pt">The Media Show</title></programme>
-<programme start="20260612010000 +0000" stop="20260612013000 +0000" channel="1_409"><title lang="pt">Newsday</title></programme>
-<programme start="20260612013000 +0000" stop="20260612014500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612014500 +0000" stop="20260612020000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260612020000 +0000" stop="20260612023000 +0000" channel="1_409"><title lang="pt">Newsday</title></programme>
-<programme start="20260612023000 +0000" stop="20260612024500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612024500 +0000" stop="20260612030000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260612030000 +0000" stop="20260612033000 +0000" channel="1_409"><title lang="pt">Newsday</title></programme>
-<programme start="20260612033000 +0000" stop="20260612034500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612034500 +0000" stop="20260612040000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260612040000 +0000" stop="20260612043000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612043000 +0000" stop="20260612050000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612050000 +0000" stop="20260612053000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612053000 +0000" stop="20260612060000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612060000 +0000" stop="20260612063000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612063000 +0000" stop="20260612070000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612070000 +0000" stop="20260612103000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612103000 +0000" stop="20260612104500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260612104500 +0000" stop="20260612110000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260612110000 +0000" stop="20260612133000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
-<programme start="20260611134000 +0000" stop="20260611145500 +0000" channel="1_414"><title lang="pt">Asas da Cidade</title></programme>
-<programme start="20260611145500 +0000" stop="20260611162600 +0000" channel="1_414"><title lang="pt">Pasárgada</title></programme>
-<programme start="20260611162600 +0000" stop="20260611163000 +0000" channel="1_414"><title lang="pt">Pílulas Espelho</title></programme>
-<programme start="20260611163000 +0000" stop="20260611164600 +0000" channel="1_414"><title lang="pt">Curta Na Tela: Escasso</title></programme>
-<programme start="20260611164600 +0000" stop="20260611170000 +0000" channel="1_414"><title lang="pt">Curta Na Tela: Peixe Morto</title></programme>
-<programme start="20260611170000 +0000" stop="20260611171500 +0000" channel="1_414"><title lang="pt">Cinejornal</title></programme>
-<programme start="20260611171500 +0000" stop="20260611173000 +0000" channel="1_414"><title lang="pt">Esquinas - Pílulas</title></programme>
-<programme start="20260611173000 +0000" stop="20260611190200 +0000" channel="1_414"><title lang="pt">Democracia em Preto e Branco</title></programme>
-<programme start="20260611190200 +0000" stop="20260611190500 +0000" channel="1_414"><title lang="pt">Pílulas Espelho</title></programme>
-<programme start="20260611190500 +0000" stop="20260611202500 +0000" channel="1_414"><title lang="pt">Eu Sou Neta Dos Antigos</title></programme>
-<programme start="20260611202500 +0000" stop="20260611203900 +0000" channel="1_414"><title lang="pt">Esquinas - Pílulas</title></programme>
-<programme start="20260611203900 +0000" stop="20260611204400 +0000" channel="1_414"><title lang="pt">Maratona Ney Matogrosso: Inéditas, Dispersas e Animadas - Ney Matogrosso - Mar Adentro</title></programme>
-<programme start="20260611204500 +0000" stop="20260611220900 +0000" channel="1_414"><title lang="pt">É Tudo Verdade: Lan - O Caricaturista</title></programme>
-<programme start="20260611220900 +0000" stop="20260611221500 +0000" channel="1_414"><title lang="pt">Guard Dog &amp; Bill Plympton No Brasil</title></programme>
-<programme start="20260611221500 +0000" stop="20260612002600 +0000" channel="1_414"><title lang="pt">Cidade De Deus</title></programme>
-<programme start="20260612002600 +0000" stop="20260612003000 +0000" channel="1_414"><title lang="pt">Pílulas Espelho</title></programme>
-<programme start="20260612003000 +0000" stop="20260612005600 +0000" channel="1_414"><title lang="pt">Maratona Chuva Negra</title></programme>
-<programme start="20260612005600 +0000" stop="20260612012800 +0000" channel="1_414"><title lang="pt">Maratona Chuva Negra</title></programme>
-<programme start="20260612012800 +0000" stop="20260612020100 +0000" channel="1_414"><title lang="pt">Maratona Chuva Negra</title></programme>
-<programme start="20260612020100 +0000" stop="20260612022900 +0000" channel="1_414"><title lang="pt">Maratona Chuva Negra</title></programme>
-<programme start="20260612022900 +0000" stop="20260612030500 +0000" channel="1_414"><title lang="pt">Maratona Chuva Negra</title></programme>
-<programme start="20260612030500 +0000" stop="20260612044000 +0000" channel="1_414"><title lang="pt">Brás Cubas</title></programme>
-<programme start="20260612044000 +0000" stop="20260612044400 +0000" channel="1_414"><title lang="pt">Pílulas Espelho</title></programme>
-<programme start="20260612044500 +0000" stop="20260612062700 +0000" channel="1_414"><title lang="pt">Rock Estrela</title></programme>
-<programme start="20260612062700 +0000" stop="20260612063000 +0000" channel="1_414"><title lang="pt">As Pragas</title></programme>
-<programme start="20260612063000 +0000" stop="20260612081000 +0000" channel="1_414"><title lang="pt">Cyclone</title></programme>
-<programme start="20260612081000 +0000" stop="20260612093000 +0000" channel="1_414"><title lang="pt">Direito De Sonhar</title></programme>
-<programme start="20260612093000 +0000" stop="20260612100000 +0000" channel="1_414"><title lang="pt">Mpb 73 - O Ano Da Reinvenção</title></programme>
-<programme start="20260612100000 +0000" stop="20260612101500 +0000" channel="1_414"><title lang="pt">Cinejornal</title></programme>
-<programme start="20260612101500 +0000" stop="20260612103000 +0000" channel="1_414"><title lang="pt">Esquinas - Pílulas</title></programme>
-<programme start="20260612103000 +0000" stop="20260612104500 +0000" channel="1_414"><title lang="pt">Cantoras Portuguesas</title></programme>
-<programme start="20260612104500 +0000" stop="20260612120000 +0000" channel="1_414"><title lang="pt">A Opinião Pública</title></programme>
-<programme start="20260612120000 +0000" stop="20260612134000 +0000" channel="1_414"><title lang="pt">Casinha Pequenina</title></programme>
 </tv>
