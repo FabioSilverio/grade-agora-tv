@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260614">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260615">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,4 +272,33 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
+<programme start="20260616141200 +0000" stop="20260616150500 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260616150500 +0000" stop="20260616155600 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260616155600 +0000" stop="20260616164700 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260616164700 +0000" stop="20260616174100 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260616174100 +0000" stop="20260616183500 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260616183500 +0000" stop="20260616192500 +0000" channel="1_407"><title lang="pt">Tubarões Pré-Históricos: Novos Mundos</title></programme>
+<programme start="20260616192500 +0000" stop="20260616201500 +0000" channel="1_407"><title lang="pt">O Duelo dos Tubarões-Brancos</title></programme>
+<programme start="20260616201500 +0000" stop="20260616210500 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260616210500 +0000" stop="20260616215500 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260616215500 +0000" stop="20260616224500 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260616224500 +0000" stop="20260616233500 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260616233500 +0000" stop="20260617002800 +0000" channel="1_407"><title lang="pt">A Caçadora de Cobras</title></programme>
+<programme start="20260617002800 +0000" stop="20260617011800 +0000" channel="1_407"><title lang="pt">Caçadores de Pítons</title></programme>
+<programme start="20260617011800 +0000" stop="20260617020900 +0000" channel="1_407"><title lang="pt">Caçadores de Pítons</title></programme>
+<programme start="20260617020900 +0000" stop="20260617030000 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260617030000 +0000" stop="20260617034900 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260617034900 +0000" stop="20260617043800 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260617043800 +0000" stop="20260617052200 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260617052200 +0000" stop="20260617061200 +0000" channel="1_407"><title lang="pt">Tubarão Voador</title></programme>
+<programme start="20260617061200 +0000" stop="20260617065900 +0000" channel="1_407"><title lang="pt">A Volta dos Tubarões Voadores</title></programme>
+<programme start="20260617065900 +0000" stop="20260617074900 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260617074900 +0000" stop="20260617083600 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260617083600 +0000" stop="20260617090000 +0000" channel="1_407"><title lang="pt">O Incrível Mundo Animal</title></programme>
+<programme start="20260617090000 +0000" stop="20260617094700 +0000" channel="1_407"><title lang="pt">A Família Irwin</title></programme>
+<programme start="20260617094700 +0000" stop="20260617104000 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260617104000 +0000" stop="20260617113300 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260617113300 +0000" stop="20260617122600 +0000" channel="1_407"><title lang="pt">Os Megatubarões da Ilha de Andros</title></programme>
+<programme start="20260617122600 +0000" stop="20260617131900 +0000" channel="1_407"><title lang="pt">Tubarão vs Kraken</title></programme>
+<programme start="20260617131900 +0000" stop="20260617141200 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
 </tv>
