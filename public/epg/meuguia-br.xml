@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260708">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260709">
 <channel id="PremiereClubes.br@SD"><display-name>Premiere Clubes</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Premiere_(2017)_logo.png/960px-Premiere_(2017)_logo.png"/></channel>
 <channel id="Combate.br@SD"><display-name>Combate</display-name><icon src="https://i.imgur.com/ZPYK5jr.png"/></channel>
 <channel id="LifetimeLatinAmerica.us@Brazil"><display-name>Lifetime</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Lifetime_2020.svg/960px-Logo_Lifetime_2020.svg.png"/></channel>
@@ -99,6 +99,6 @@
 <channel id="UniversalTVLatinAmerica.us@Brazil"><display-name>Universal Channel</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Universal_TV_logo.svg/960px-Universal_TV_logo.svg.png"/></channel>
 <channel id="RedeVida.br@SD"><display-name>Rede Vida</display-name><icon src="https://i.imgur.com/mP1qfp2.png"/></channel>
 <channel id="CanalViva.br@SD"><display-name>Viva</display-name><icon src="https://i.imgur.com/uNHu40M.png"/></channel>
-<channel id="WarnerChannel.us@Brazil"><display-name>Warner Channel</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Warner_TV_logo.svg/960px-Warner_TV_logo.svg.png"/></channel>
+<channel id="WarnerChannel.us@Brazil"><display-name>Warner Channel</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Warner_Channel_2026.svg/960px-Warner_Channel_2026.svg.png"/></channel>
 <channel id="WooHoo.br@SD"><display-name>Woohoo</display-name><icon src="https://i.imgur.com/me622pa.png"/></channel>
 </tv>
