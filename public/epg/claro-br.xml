@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260802">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260803">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,4 +272,68 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
+<programme start="20260803153000 +0000" stop="20260803154500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260803154500 +0000" stop="20260803163000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
+<programme start="20260803163000 +0000" stop="20260803170000 +0000" channel="1_409"><title lang="pt">Focus on Africa</title></programme>
+<programme start="20260803170000 +0000" stop="20260803190000 +0000" channel="1_409"><title lang="pt">The World Today with Maryam Moshiri</title></programme>
+<programme start="20260803190000 +0000" stop="20260803200000 +0000" channel="1_409"><title lang="pt">The Context USA</title></programme>
+<programme start="20260803200000 +0000" stop="20260803210000 +0000" channel="1_409"><title lang="pt">The Context</title></programme>
+<programme start="20260803210000 +0000" stop="20260803213000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
+<programme start="20260803213000 +0000" stop="20260803220000 +0000" channel="1_409"><title lang="pt">Newsnight</title></programme>
+<programme start="20260803220000 +0000" stop="20260803230000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
+<programme start="20260803230000 +0000" stop="20260803233000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260803233000 +0000" stop="20260804000000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
+<programme start="20260804000000 +0000" stop="20260804003000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804003000 +0000" stop="20260804010000 +0000" channel="1_409"><title lang="pt">Talking Business</title></programme>
+<programme start="20260804010000 +0000" stop="20260804013000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
+<programme start="20260804013000 +0000" stop="20260804014500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804014500 +0000" stop="20260804020000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
+<programme start="20260804020000 +0000" stop="20260804023000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
+<programme start="20260804023000 +0000" stop="20260804024500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804024500 +0000" stop="20260804030000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
+<programme start="20260804030000 +0000" stop="20260804033000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
+<programme start="20260804033000 +0000" stop="20260804034500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804034500 +0000" stop="20260804040000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
+<programme start="20260804040000 +0000" stop="20260804043000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804043000 +0000" stop="20260804050000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804050000 +0000" stop="20260804053000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804053000 +0000" stop="20260804060000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804060000 +0000" stop="20260804063000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804063000 +0000" stop="20260804070000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804070000 +0000" stop="20260804103000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804103000 +0000" stop="20260804104500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
+<programme start="20260804104500 +0000" stop="20260804110000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
+<programme start="20260804110000 +0000" stop="20260804133000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
+<programme start="20260804133000 +0000" stop="20260804134500 +0000" channel="1_409"><title lang="pt">Business Today - NYSE Opening Bell</title></programme>
+<programme start="20260804134500 +0000" stop="20260804140000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
+<programme start="20260804140000 +0000" stop="20260804153000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
+<programme start="20260803145800 +0000" stop="20260803155000 +0000" channel="1_419"><title lang="pt">American Hot Rod</title></programme>
+<programme start="20260803155000 +0000" stop="20260803164200 +0000" channel="1_419"><title lang="pt">American Hot Rod</title></programme>
+<programme start="20260803164200 +0000" stop="20260803173400 +0000" channel="1_419"><title lang="pt">Oficinaço</title></programme>
+<programme start="20260803173400 +0000" stop="20260803182600 +0000" channel="1_419"><title lang="pt">Oficinaço</title></programme>
+<programme start="20260803182600 +0000" stop="20260803191800 +0000" channel="1_419"><title lang="pt">Oficinaço</title></programme>
+<programme start="20260803191800 +0000" stop="20260803201000 +0000" channel="1_419"><title lang="pt">Joias Sobre Rodas</title></programme>
+<programme start="20260803201000 +0000" stop="20260803210200 +0000" channel="1_419"><title lang="pt">Dupla do Barulho</title></programme>
+<programme start="20260803210200 +0000" stop="20260803215400 +0000" channel="1_419"><title lang="pt">Oficinaço</title></programme>
+<programme start="20260803215400 +0000" stop="20260803222000 +0000" channel="1_419"><title lang="pt">Vida Automotiva</title></programme>
+<programme start="20260803222000 +0000" stop="20260803224600 +0000" channel="1_419"><title lang="pt">Vida Automotiva</title></programme>
+<programme start="20260803224600 +0000" stop="20260803233800 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260803233800 +0000" stop="20260804003000 +0000" channel="1_419"><title lang="pt">Twin Turbos</title></programme>
+<programme start="20260804003000 +0000" stop="20260804012200 +0000" channel="1_419"><title lang="pt">Overhaulin&apos;: Os Supercarros</title></programme>
+<programme start="20260804012200 +0000" stop="20260804021400 +0000" channel="1_419"><title lang="pt">Acumuladores de Carros</title></programme>
+<programme start="20260804021400 +0000" stop="20260804030600 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804030600 +0000" stop="20260804035800 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804035800 +0000" stop="20260804045000 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804045000 +0000" stop="20260804054000 +0000" channel="1_419"><title lang="pt">Twin Turbos</title></programme>
+<programme start="20260804054000 +0000" stop="20260804063000 +0000" channel="1_419"><title lang="pt">Overhaulin&apos;: Os Supercarros</title></programme>
+<programme start="20260804063000 +0000" stop="20260804072000 +0000" channel="1_419"><title lang="pt">Acumuladores de Carros</title></programme>
+<programme start="20260804072000 +0000" stop="20260804081000 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804081000 +0000" stop="20260804090000 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804090000 +0000" stop="20260804095000 +0000" channel="1_419"><title lang="pt">Oficina de Sonhos</title></programme>
+<programme start="20260804095000 +0000" stop="20260804104000 +0000" channel="1_419"><title lang="pt">Texas Metal&apos;s Loud And Lifted</title></programme>
+<programme start="20260804104000 +0000" stop="20260804113000 +0000" channel="1_419"><title lang="pt">Viciado em Motores: Goblin Garage</title></programme>
+<programme start="20260804113000 +0000" stop="20260804122200 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
+<programme start="20260804122200 +0000" stop="20260804131400 +0000" channel="1_419"><title lang="pt">Carros Únicos</title></programme>
+<programme start="20260804131400 +0000" stop="20260804140600 +0000" channel="1_419"><title lang="pt">Overhaulin&apos;: Os Supercarros</title></programme>
+<programme start="20260804140600 +0000" stop="20260804145800 +0000" channel="1_419"><title lang="pt">Oficina do Barulho</title></programme>
 </tv>
