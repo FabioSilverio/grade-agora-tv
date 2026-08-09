@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260808">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260809">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,4 +272,173 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
+<programme start="20260809121300 +0000" stop="20260809122000 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809122000 +0000" stop="20260809122700 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809122700 +0000" stop="20260809123500 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809123500 +0000" stop="20260809124300 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809124300 +0000" stop="20260809125000 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809125000 +0000" stop="20260809125800 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809125800 +0000" stop="20260809130900 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809130900 +0000" stop="20260809132000 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809132000 +0000" stop="20260809133200 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809133200 +0000" stop="20260809134400 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809134400 +0000" stop="20260809135500 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809135500 +0000" stop="20260809140700 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809140700 +0000" stop="20260809141800 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809141800 +0000" stop="20260809143000 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809143000 +0000" stop="20260809145200 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809145200 +0000" stop="20260809145900 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809145900 +0000" stop="20260809150600 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809150600 +0000" stop="20260809151300 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809151300 +0000" stop="20260809152000 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809152000 +0000" stop="20260809152800 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809152800 +0000" stop="20260809153500 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260809153500 +0000" stop="20260809154200 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260809154200 +0000" stop="20260809154900 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809154900 +0000" stop="20260809155600 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260809155600 +0000" stop="20260809160300 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260809160300 +0000" stop="20260809161000 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260809161000 +0000" stop="20260809161800 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260809161800 +0000" stop="20260809162500 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260809162500 +0000" stop="20260809163300 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260809163300 +0000" stop="20260809174800 +0000" channel="1_410"><title lang="pt">Scooby-Doo! E a Maldição do Frankenstein</title></programme>
+<programme start="20260809174800 +0000" stop="20260809175600 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809175600 +0000" stop="20260809180400 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809180400 +0000" stop="20260809182800 +0000" channel="1_410"><title lang="pt">A Casa Mágica da Gabby</title></programme>
+<programme start="20260809182800 +0000" stop="20260809184000 +0000" channel="1_410"><title lang="pt">O Pequeno Grande Mundo de Jéssica</title></programme>
+<programme start="20260809184000 +0000" stop="20260809185200 +0000" channel="1_410"><title lang="pt">O Pequeno Grande Mundo de Jéssica</title></programme>
+<programme start="20260809185200 +0000" stop="20260809190400 +0000" channel="1_410"><title lang="pt">O Pequeno Grande Mundo de Jéssica</title></programme>
+<programme start="20260809190400 +0000" stop="20260809191100 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809191100 +0000" stop="20260809191900 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809191900 +0000" stop="20260809192700 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809192700 +0000" stop="20260809193400 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260809193400 +0000" stop="20260809194200 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809194200 +0000" stop="20260809195100 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809195100 +0000" stop="20260809195900 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809195900 +0000" stop="20260809200800 +0000" channel="1_410"><title lang="pt">Lu E Seus Amigos</title></programme>
+<programme start="20260809200800 +0000" stop="20260809201100 +0000" channel="1_410"><title lang="pt">NuNi</title></programme>
+<programme start="20260809201100 +0000" stop="20260809201400 +0000" channel="1_410"><title lang="pt">NuNi</title></programme>
+<programme start="20260809201400 +0000" stop="20260809201700 +0000" channel="1_410"><title lang="pt">NuNi</title></programme>
+<programme start="20260809201700 +0000" stop="20260809202000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260809202000 +0000" stop="20260809202400 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260809202400 +0000" stop="20260809202700 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260809202700 +0000" stop="20260809203000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260809203000 +0000" stop="20260809203300 +0000" channel="1_410"><title lang="pt">Mundo Bita</title></programme>
+<programme start="20260809203300 +0000" stop="20260809203600 +0000" channel="1_410"><title lang="pt">Mundo Bita</title></programme>
+<programme start="20260809203600 +0000" stop="20260809203800 +0000" channel="1_410"><title lang="pt">Mundo Bita</title></programme>
+<programme start="20260809203800 +0000" stop="20260809205700 +0000" channel="1_410"><title lang="pt">Meekah</title></programme>
+<programme start="20260809205700 +0000" stop="20260809210800 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809210800 +0000" stop="20260809212000 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809212000 +0000" stop="20260809213200 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809213200 +0000" stop="20260809214400 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809214400 +0000" stop="20260809215500 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260809215500 +0000" stop="20260809220700 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809220700 +0000" stop="20260809221800 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809221800 +0000" stop="20260809223000 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809223000 +0000" stop="20260809225200 +0000" channel="1_410"><title lang="pt">Batwheels</title></programme>
+<programme start="20260809225200 +0000" stop="20260809225800 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260809225800 +0000" stop="20260809230500 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260809230500 +0000" stop="20260809231100 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260809231100 +0000" stop="20260809231800 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260809231800 +0000" stop="20260809232400 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260809232400 +0000" stop="20260809233100 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260809233100 +0000" stop="20260809233800 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260809233800 +0000" stop="20260809234600 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809234600 +0000" stop="20260809235300 +0000" channel="1_410"><title lang="pt">Mundo Bita Imagine-se</title></programme>
+<programme start="20260809235300 +0000" stop="20260810000000 +0000" channel="1_410"><title lang="pt">Mundo Bita: Imagine-se</title></programme>
+<programme start="20260810000000 +0000" stop="20260810000700 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810000700 +0000" stop="20260810001400 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810001400 +0000" stop="20260810002200 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810002200 +0000" stop="20260810002900 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810002900 +0000" stop="20260810004200 +0000" channel="1_410"><title lang="pt">Bloquinho da Bea</title></programme>
+<programme start="20260810004200 +0000" stop="20260810005400 +0000" channel="1_410"><title lang="pt">Bloquinho da Bea</title></programme>
+<programme start="20260810005400 +0000" stop="20260810010600 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810010600 +0000" stop="20260810011800 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810011800 +0000" stop="20260810012900 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810012900 +0000" stop="20260810013600 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810013600 +0000" stop="20260810014300 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810014300 +0000" stop="20260810015100 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810015100 +0000" stop="20260810015900 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810015900 +0000" stop="20260810020600 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810020600 +0000" stop="20260810021300 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810021300 +0000" stop="20260810022000 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810022000 +0000" stop="20260810022700 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810022700 +0000" stop="20260810023500 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810023500 +0000" stop="20260810024200 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810024200 +0000" stop="20260810024900 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810024900 +0000" stop="20260810025600 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810025600 +0000" stop="20260810030300 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810030300 +0000" stop="20260810031000 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810031000 +0000" stop="20260810031700 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810031700 +0000" stop="20260810032400 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810032400 +0000" stop="20260810033200 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810033200 +0000" stop="20260810033900 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810033900 +0000" stop="20260810034700 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810034700 +0000" stop="20260810035400 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810035400 +0000" stop="20260810040200 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810040200 +0000" stop="20260810041400 +0000" channel="1_410"><title lang="pt">Blippi</title></programme>
+<programme start="20260810041400 +0000" stop="20260810043200 +0000" channel="1_410"><title lang="pt">Blippi</title></programme>
+<programme start="20260810043200 +0000" stop="20260810043500 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810043500 +0000" stop="20260810043900 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810043900 +0000" stop="20260810044200 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810044200 +0000" stop="20260810044500 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810044500 +0000" stop="20260810044900 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810044900 +0000" stop="20260810045200 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810045200 +0000" stop="20260810045600 +0000" channel="1_410"><title lang="pt">Maravilhas do Blippi</title></programme>
+<programme start="20260810045600 +0000" stop="20260810050800 +0000" channel="1_410"><title lang="pt">Meekah</title></programme>
+<programme start="20260810050800 +0000" stop="20260810052600 +0000" channel="1_410"><title lang="pt">Meekah</title></programme>
+<programme start="20260810052600 +0000" stop="20260810054200 +0000" channel="1_410"><title lang="pt">Meekah</title></programme>
+<programme start="20260810054200 +0000" stop="20260810055800 +0000" channel="1_410"><title lang="pt">Meekah</title></programme>
+<programme start="20260810055800 +0000" stop="20260810060500 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810060500 +0000" stop="20260810061200 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810061200 +0000" stop="20260810061900 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810061900 +0000" stop="20260810062600 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810062600 +0000" stop="20260810063400 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810063400 +0000" stop="20260810064100 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810064100 +0000" stop="20260810064800 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810064800 +0000" stop="20260810065500 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810065500 +0000" stop="20260810070300 +0000" channel="1_410"><title lang="pt">Grizzy e os Lemmings</title></programme>
+<programme start="20260810070300 +0000" stop="20260810071400 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810071400 +0000" stop="20260810072500 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810072500 +0000" stop="20260810073700 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810073700 +0000" stop="20260810074800 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810074800 +0000" stop="20260810075900 +0000" channel="1_410"><title lang="pt">Hey Fuzzy Yellow</title></programme>
+<programme start="20260810075900 +0000" stop="20260810080300 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810080300 +0000" stop="20260810080600 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810080600 +0000" stop="20260810081000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810081000 +0000" stop="20260810081300 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810081300 +0000" stop="20260810081600 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810081600 +0000" stop="20260810082000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810082000 +0000" stop="20260810082300 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810082300 +0000" stop="20260810082600 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810082600 +0000" stop="20260810083000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810083000 +0000" stop="20260810083400 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810083400 +0000" stop="20260810083700 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810083700 +0000" stop="20260810084100 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810084100 +0000" stop="20260810084400 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810084400 +0000" stop="20260810084800 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810084800 +0000" stop="20260810085100 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810085100 +0000" stop="20260810085500 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810085500 +0000" stop="20260810090000 +0000" channel="1_410"><title lang="pt">Morphle 3D</title></programme>
+<programme start="20260810090000 +0000" stop="20260810090700 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810090700 +0000" stop="20260810091500 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810091500 +0000" stop="20260810092200 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810092200 +0000" stop="20260810093000 +0000" channel="1_410"><title lang="pt">Oi, Duggee!</title></programme>
+<programme start="20260810093000 +0000" stop="20260810094300 +0000" channel="1_410"><title lang="pt">Bloquinho da Bea</title></programme>
+<programme start="20260810094300 +0000" stop="20260810095500 +0000" channel="1_410"><title lang="pt">Bloquinho da Bea</title></programme>
+<programme start="20260810095500 +0000" stop="20260810100200 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810100200 +0000" stop="20260810101000 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810101000 +0000" stop="20260810101800 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810101800 +0000" stop="20260810102500 +0000" channel="1_410"><title lang="pt">Pocoyo</title></programme>
+<programme start="20260810102500 +0000" stop="20260810103200 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260810103200 +0000" stop="20260810104100 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260810104100 +0000" stop="20260810104800 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260810104800 +0000" stop="20260810105500 +0000" channel="1_410"><title lang="pt">Lucas A Aranha</title></programme>
+<programme start="20260810105500 +0000" stop="20260810110700 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260810110700 +0000" stop="20260810111800 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260810111800 +0000" stop="20260810112900 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260810112900 +0000" stop="20260810114100 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260810114100 +0000" stop="20260810115200 +0000" channel="1_410"><title lang="pt">Perninha em Obras</title></programme>
+<programme start="20260810115200 +0000" stop="20260810115800 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
+<programme start="20260810115800 +0000" stop="20260810120500 +0000" channel="1_410"><title lang="pt">Cuquín</title></programme>
 </tv>
