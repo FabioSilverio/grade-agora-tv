@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260812">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260813">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,4 +272,32 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
+<programme start="20260813132200 +0000" stop="20260813141700 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260813141700 +0000" stop="20260813151200 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260813151200 +0000" stop="20260813160300 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260813160300 +0000" stop="20260813165400 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260813165400 +0000" stop="20260813174900 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260813174900 +0000" stop="20260813184300 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260813184300 +0000" stop="20260813193700 +0000" channel="1_407"><title lang="pt">Em Busca dos Megatubarões Brancos</title></programme>
+<programme start="20260813193700 +0000" stop="20260813203100 +0000" channel="1_407"><title lang="pt">Clube da Luta dos Tubarões Brancos</title></programme>
+<programme start="20260813203100 +0000" stop="20260813212100 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260813212100 +0000" stop="20260813221100 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260813221100 +0000" stop="20260813230100 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260813230100 +0000" stop="20260813235000 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260813235000 +0000" stop="20260814004200 +0000" channel="1_407"><title lang="pt">Desvendando os Oceanos com Jeremy Wade</title></programme>
+<programme start="20260814004200 +0000" stop="20260814013100 +0000" channel="1_407"><title lang="pt">Em Busca de Atlântida</title></programme>
+<programme start="20260814013100 +0000" stop="20260814022100 +0000" channel="1_407"><title lang="pt">Em Busca de Atlântida</title></programme>
+<programme start="20260814022100 +0000" stop="20260814031100 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260814031100 +0000" stop="20260814035900 +0000" channel="1_407"><title lang="pt">Monstros do Rio</title></programme>
+<programme start="20260814035900 +0000" stop="20260814044700 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260814044700 +0000" stop="20260814053600 +0000" channel="1_407"><title lang="pt">Pesca Mortal</title></programme>
+<programme start="20260814053600 +0000" stop="20260814062700 +0000" channel="1_407"><title lang="pt">Em Busca dos Megatubarões Brancos</title></programme>
+<programme start="20260814062700 +0000" stop="20260814071800 +0000" channel="1_407"><title lang="pt">Clube da Luta dos Tubarões Brancos</title></programme>
+<programme start="20260814071800 +0000" stop="20260814080900 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260814080900 +0000" stop="20260814090000 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260814090000 +0000" stop="20260814095200 +0000" channel="1_407"><title lang="pt">A Família Irwin</title></programme>
+<programme start="20260814095200 +0000" stop="20260814104400 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260814104400 +0000" stop="20260814113600 +0000" channel="1_407"><title lang="pt">Veterinários do Texas</title></programme>
+<programme start="20260814113600 +0000" stop="20260814122900 +0000" channel="1_407"><title lang="pt">Tubarões Pré-Históricos</title></programme>
+<programme start="20260814122900 +0000" stop="20260814132200 +0000" channel="1_407"><title lang="pt">Tubarão Voador</title></programme>
 </tv>
