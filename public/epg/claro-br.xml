@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260817">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260818">
 <channel id="1_407"><display-name>Animal Planet</display-name></channel>
 <channel id="1_409"><display-name>BBC World News</display-name></channel>
 <channel id="1_410"><display-name>cartoonito</display-name></channel>
@@ -272,39 +272,4 @@
 <channel id="1_2445"><display-name>Warner Channel HD</display-name></channel>
 <channel id="1_2446"><display-name>Cartoon Network HD</display-name></channel>
 <channel id="1_2447"><display-name>CANAL DO CLIENTE HD</display-name></channel>
-<programme start="20260817133000 +0000" stop="20260817134500 +0000" channel="1_409"><title lang="pt">Business Today - NYSE Opening Bell</title></programme>
-<programme start="20260817134500 +0000" stop="20260817140000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
-<programme start="20260817140000 +0000" stop="20260817153000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
-<programme start="20260817153000 +0000" stop="20260817154500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260817154500 +0000" stop="20260817163000 +0000" channel="1_409"><title lang="pt">Verified Live</title></programme>
-<programme start="20260817163000 +0000" stop="20260817170000 +0000" channel="1_409"><title lang="pt">Focus on Africa</title></programme>
-<programme start="20260817170000 +0000" stop="20260817190000 +0000" channel="1_409"><title lang="pt">The World Today with Maryam Moshiri</title></programme>
-<programme start="20260817190000 +0000" stop="20260817200000 +0000" channel="1_409"><title lang="pt">The Context USA</title></programme>
-<programme start="20260817200000 +0000" stop="20260817210000 +0000" channel="1_409"><title lang="pt">The Context</title></programme>
-<programme start="20260817210000 +0000" stop="20260817213000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
-<programme start="20260817213000 +0000" stop="20260817220000 +0000" channel="1_409"><title lang="pt">Newsnight</title></programme>
-<programme start="20260817220000 +0000" stop="20260817230000 +0000" channel="1_409"><title lang="pt">BBC World News America</title></programme>
-<programme start="20260817230000 +0000" stop="20260817233000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260817233000 +0000" stop="20260818000000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
-<programme start="20260818000000 +0000" stop="20260818003000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818003000 +0000" stop="20260818010000 +0000" channel="1_409"><title lang="pt">Talking Business</title></programme>
-<programme start="20260818010000 +0000" stop="20260818013000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
-<programme start="20260818013000 +0000" stop="20260818014500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818014500 +0000" stop="20260818020000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260818020000 +0000" stop="20260818023000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
-<programme start="20260818023000 +0000" stop="20260818024500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818024500 +0000" stop="20260818030000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260818030000 +0000" stop="20260818033000 +0000" channel="1_409"><title lang="pt">Newscast</title></programme>
-<programme start="20260818033000 +0000" stop="20260818034500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818034500 +0000" stop="20260818040000 +0000" channel="1_409"><title lang="pt">BBC Sport</title></programme>
-<programme start="20260818040000 +0000" stop="20260818043000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818043000 +0000" stop="20260818050000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818050000 +0000" stop="20260818053000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818053000 +0000" stop="20260818060000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818060000 +0000" stop="20260818063000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818063000 +0000" stop="20260818070000 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818070000 +0000" stop="20260818103000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818103000 +0000" stop="20260818104500 +0000" channel="1_409"><title lang="pt">Business Today</title></programme>
-<programme start="20260818104500 +0000" stop="20260818110000 +0000" channel="1_409"><title lang="pt">BBC News</title></programme>
-<programme start="20260818110000 +0000" stop="20260818133000 +0000" channel="1_409"><title lang="pt">BBC News Now</title></programme>
 </tv>
