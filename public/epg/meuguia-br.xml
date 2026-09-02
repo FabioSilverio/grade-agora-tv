@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20260901">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20260902">
 <channel id="PremiereClubes.br@SD"><display-name>Premiere Clubes</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Premiere_(2017)_logo.png/960px-Premiere_(2017)_logo.png"/></channel>
 <channel id="Combate.br@SD"><display-name>Combate</display-name><icon src="https://i.imgur.com/ZPYK5jr.png"/></channel>
 <channel id="LifetimeLatinAmerica.us@Brazil"><display-name>Lifetime</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Lifetime_2020.svg/960px-Logo_Lifetime_2020.svg.png"/></channel>
@@ -27,7 +27,7 @@
 <channel id="DisneyChannel.br@SD"><display-name>Disney Channel</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Disney_channel_2019.png/960px-Disney_channel_2019.png"/></channel>
 <channel id="DiscoveryScienceLatinAmerica.us@Brazil"><display-name>Discovery Science</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Discovery_science_new_logo_2017.png/960px-Discovery_science_new_logo_2017.png"/></channel>
 <channel id="DiscoveryTurboLatinAmerica.us@Brazil"><display-name>Discovery Turbo</display-name><icon src="https://i.imgur.com/1pQPxu3.png"/></channel>
-<channel id="DW.de@Deutsch"><display-name>Deutsche Welle</display-name><icon src="https://i.imgur.com/8MRNFb9.png"/></channel>
+<channel id="DW.de@Deutsch"><display-name>Deutsche Welle</display-name><icon src="https://i.imgur.com/MNKkgfa.png"/></channel>
 <channel id="ELatinAmerica.us@Brazil"><display-name>E! Entertainment Television</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/E%21_Logo_2012.svg/500px-E%21_Logo_2012.svg.png"/></channel>
 <channel id="ESPN.br@SD"><display-name>ESPN Brasil</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png"/></channel>
 <channel id="TVEscola.br@SD"><display-name>TV Escola</display-name><icon src="https://i.imgur.com/OF6aGQj.png"/></channel>
@@ -56,7 +56,7 @@
 <channel id="Multishow.br@SD"><display-name>Multishow</display-name><icon src="https://i.imgur.com/bqVg8nT.png"/></channel>
 <channel id="MTV.br@SD"><display-name>MTV</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MTV_2021_%28brand_version%29.svg/960px-MTV_2021_%28brand_version%29.svg.png"/></channel>
 <channel id="BandNews.br@SD"><display-name>Band News</display-name><icon src="https://i.ibb.co/0jVZBFp/u8ya-iw-R-400x400.jpg"/></channel>
-<channel id="NHKWorldJapan.jp@SD"><display-name>NHK World</display-name><icon src="https://jiotvimages.cdn.jio.com/dare_images/images/NHK_World_Japan.png"/></channel>
+<channel id="NHKWorldJapan.jp@SD"><display-name>NHK World</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/PBS_Kids_logo_%282022%29.svg/960px-PBS_Kids_logo_%282022%29.svg.png"/></channel>
 <channel id="Nickelodeon.br@SD"><display-name>Nickelodeon</display-name><icon src="https://i.imgur.com/E84jnP8.png"/></channel>
 <channel id="NickJr.br@SD"><display-name>Nick Jr.</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Nick_Jr._logo_2023.svg"/></channel>
 <channel id="CanalOff.br@SD"><display-name>OFF HD</display-name><icon src="https://i.imgur.com/1biaLgJ.png"/></channel>
