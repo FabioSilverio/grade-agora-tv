@@ -47,10 +47,16 @@ sozinhos; HLS quase nao sente) e todo o video passa pela sua cota de trafego. Pa
 muito, rode o proxy no proprio PC:
 
 ```bash
-npm run proxy   # http://localhost:8787/api/proxy
+npm run proxy   # http://127.0.0.1:8787/api/proxy
 ```
 
-e em **Ajustes > Endereco do proxy** use `http://localhost:8787/api/proxy`.
+e em **Ajustes > Endereco do proxy** use `http://127.0.0.1:8787/api/proxy`. Alguns provedores
+recusam video para IPs de datacenter (erro HTTP 520/403 no player); com o proxy local o video sai
+do seu IP, como no VLC.
+
+No Windows, de dois cliques em `scripts\windows\instalar-proxy.cmd`: o proxy passa a rodar
+escondido e a iniciar sozinho com o Windows (se cair, reinicia). Log em
+`%LOCALAPPDATA%\GradeAgoraProxy.log`. Para remover: `scripts\windows\desinstalar-proxy.cmd`.
 
 Audio AC-3/Dolby nao toca no Chrome (limitacao do navegador); o Edge costuma tocar. A gravacao
 funciona em qualquer caso.
