@@ -8,8 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "proxy": "node server/local-proxy.mjs",
-    "test": "node --test --experimental-strip-types tests/*.test.ts"
+    "proxy": "npm run local",
+    "test": "node --test --experimental-strip-types tests/*.test.ts",
+    "build:local": "vite build --config vite.local.config.ts",
+    "local": "npm run build:local && node server/dist/local.mjs"
   },
   "dependencies": {
     "hls.js": "^1.6.15",

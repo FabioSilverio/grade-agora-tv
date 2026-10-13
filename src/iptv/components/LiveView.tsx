@@ -2,7 +2,9 @@ import { CalendarPlus, Circle, CircleStop, Clock, RefreshCw, Repeat, Search, Sta
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { currentProgramme, reloadEpg, useEpgStatus, useProgrammes } from '../epg'
 import { channelCandidates } from '../playlists'
-import { isActive, startRecording, stopRecording, useRecordings } from '../recorder'
+import { useActiveRecordings } from '../activeRecordings'
+import { localRecordNow, localStop, useLocalService } from '../localService'
+import { startRecording, stopRecording } from '../recorder'
 import { store, useAppState } from '../state'
 import { uid } from '../storage'
 import type { Channel, PlaylistData, Programme } from '../types'
@@ -213,10 +215,12 @@ function LivePlayer({ playlistId, channel }: { playlistId: string; channel: Chan
 }
 
 function RecordNowButton({ playlistId, channel, current }: { playlistId: string; channel: Channel; current?: Programme }) {
-  const recordings = useRecordings()
+  const recordings = useActiveRecordings()
+  const local = useLocalService()
   const [open, setOpen] = useState(false)
+  const [error, setError] = useState('')
   const ref = useRef<HTMLDivElement>(null)
-  const active = recordings.find((item) => isActive(item) && item.channelName === channel.name)
+  const active = recordings.find((item) => item.channelName === channel.name)
 
   useEffect(() => {
     if (!open) return
@@ -227,7 +231,12 @@ function RecordNowButton({ playlistId, channel, current }: { playlistId: string;
 
   if (active) {
     return (
-      <button type="button" className="tv-rec-btn on" onClick={() => stopRecording(active.id)} title="Parar gravacao">
+      <button
+        type="button"
+        className="tv-rec-btn on"
+        onClick={() => (active.where === 'pc' ? void localStop(active.id) : stopRecording(active.id))}
+        title="Parar gravacao"
+      >
         <CircleStop size={16} /> Gravando · parar
       </button>
     )
@@ -235,18 +244,25 @@ function RecordNowButton({ playlistId, channel, current }: { playlistId: string;
 
   const record = (stopAt: number, title?: string) => {
     setOpen(false)
-    void startRecording({
-      channel: toChannelRef(playlistId, channel),
-      title: title ?? current?.title ?? channel.name,
-      stopAt,
-      occurrenceKey: uid('manual'),
-    })
+    const ref = toChannelRef(playlistId, channel)
+    const name = title ?? current?.title ?? channel.name
+    // Com o gravador do PC ligado, grava por ele (continua mesmo se fechar o site).
+    if (local.available) {
+      localRecordNow(ref, name, stopAt).catch((err) => setError(err instanceof Error ? err.message : String(err)))
+      return
+    }
+    void startRecording({ channel: ref, title: name, stopAt, occurrenceKey: uid('manual') })
   }
   const padAfter = store.get().settings.padAfterMin * 60_000
 
   return (
     <div className="tv-dropdown" ref={ref}>
-      <button type="button" className="tv-rec-btn" onClick={() => setOpen((value) => !value)} title="Gravar agora">
+      <button
+        type="button"
+        className="tv-rec-btn"
+        onClick={() => setOpen((value) => !value)}
+        title={error ? `Erro: ${error}` : local.available ? 'Gravar agora (no gravador do PC)' : 'Gravar agora'}
+      >
         <Circle size={14} fill="currentColor" /> Gravar
       </button>
       {open && (

@@ -1,6 +1,7 @@
 import { Loader2, Maximize, PictureInPicture2, TriangleAlert } from 'lucide-react'
+import type { PlaylistLoaderConstructor } from 'hls.js'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { mustProxy, proxify, type NetConfig } from '../net'
+import { isProxied, mustProxy, proxify, unproxy, type NetConfig } from '../net'
 import { netConfig, useAppState } from '../state'
 import type { StreamHeaders } from '../types'
 
@@ -19,6 +20,11 @@ export type Engine = 'hls' | 'mpegts' | 'native'
 type Attempt = { url: string; engine: Engine; viaProxy: boolean }
 
 const START_TIMEOUT_MS = 20_000
+const STALL_TIMEOUT_MS = 12_000
+const MAX_RETRIES = 8
+
+/** Playlist original -> URL final apos o redirecionamento (token do painel Xtream). */
+const stickyPlaylists = new Map<string, string>()
 
 function enginesFor(url: string, live: boolean): Engine[] {
   if (/\.m3u8(\?|$)/i.test(url) || /\/m3u8\b|type=m3u8|output=hls/i.test(url)) return ['hls']
@@ -62,40 +68,87 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
     const savedVolume = Number(localStorage.getItem('iptv:volume'))
     if (Number.isFinite(savedVolume) && savedVolume > 0) video.volume = Math.min(1, savedVolume)
 
-    const next = (reason?: string) => {
-      if (cancelled) return
-      if (reason) errors.push(reason)
+    let played = false
+    let retries = 0
+    let stallTimer: ReturnType<typeof setTimeout> | undefined
+
+    const start = (attempt: Attempt) => {
       clearTimeout(timer)
+      clearTimeout(stallTimer)
       cleanup?.()
-      cleanup = null
+      played = false
+      setStatus({
+        state: 'loading',
+        message: retries ? 'Reconectando...' : attempt.viaProxy ? 'Conectando via proxy...' : 'Conectando...',
+      })
+      timer = setTimeout(() => onFail('tempo esgotado ao iniciar'), START_TIMEOUT_MS)
+      cleanup = startEngine(video, attempt, source, net, (message) => onFail(message))
+    }
+
+    const next = () => {
+      if (cancelled) return
       index += 1
+      retries = 0
       const attempt = attempts[index]
       if (!attempt) {
+        cleanup?.()
+        cleanup = null
         setStatus({ state: 'error', message: explain(errors) })
         return
       }
-      setStatus({
-        state: 'loading',
-        message: attempt.viaProxy ? 'Conectando via proxy...' : 'Conectando...',
-      })
-      timer = setTimeout(() => next('tempo esgotado ao iniciar'), START_TIMEOUT_MS)
-      cleanup = startEngine(video, attempt, source, net, (message) => next(message))
+      start(attempt)
+    }
+
+    const onFail = (reason: string) => {
+      if (cancelled) return
+      errors.push(reason)
+      // Ja estava tocando: e queda momentanea, reconecta a mesma fonte em vez de trocar de formato.
+      if ((played || retries > 0) && retries < MAX_RETRIES) {
+        retries += 1
+        const attempt = attempts[index]
+        clearTimeout(timer)
+        timer = setTimeout(() => !cancelled && start(attempt), Math.min(5000, 800 * retries))
+        return
+      }
+      next()
     }
 
     const onPlaying = () => {
       clearTimeout(timer)
+      clearTimeout(stallTimer)
+      if (!played) {
+        played = true
+        // 1 min tocando sem erro zera o contador de reconexoes
+        setTimeout(() => {
+          if (played && !cancelled) retries = 0
+        }, 60_000)
+      }
       setStatus({ state: 'playing' })
+    }
+    // Travou (buffer vazio) por muito tempo num ao vivo: reconecta.
+    const onWaiting = () => {
+      if (!source.live || !played) return
+      clearTimeout(stallTimer)
+      stallTimer = setTimeout(() => onFail('travado sem receber video'), STALL_TIMEOUT_MS)
+    }
+    const onProgress = () => {
+      if (!video.paused && video.readyState >= 3) clearTimeout(stallTimer)
     }
     const onVolume = () => localStorage.setItem('iptv:volume', String(video.muted ? 0 : video.volume))
     video.addEventListener('playing', onPlaying)
+    video.addEventListener('waiting', onWaiting)
+    video.addEventListener('timeupdate', onProgress)
     video.addEventListener('volumechange', onVolume)
     next()
 
     return () => {
       cancelled = true
       clearTimeout(timer)
+      clearTimeout(stallTimer)
       cleanup?.()
       video.removeEventListener('playing', onPlaying)
+      video.removeEventListener('waiting', onWaiting)
+      video.removeEventListener('timeupdate', onProgress)
       video.removeEventListener('volumechange', onVolume)
     }
     // source.key identifica a fonte; settings de rede reiniciam o player
@@ -177,13 +230,49 @@ function startEngine(video: HTMLVideoElement, attempt: Attempt, source: PlayerSo
         else fail('HLS nao suportado')
         return
       }
+      // Paineis Xtream redirecionam /live/.../id.m3u8 para uma URL com token. Recarregar a
+      // playlist pela URL original gera um token novo a cada poucos segundos e, em contas com
+      // 1 conexao, derruba o token anterior (video trava). Entao as recargas usam a URL final.
+      const BaseLoader = Hls.DefaultConfig.loader
+      class StickyPlaylistLoader extends BaseLoader {
+        load(...args: Parameters<InstanceType<typeof BaseLoader>['load']>) {
+          const [context, config, callbacks] = args
+          const original = unproxy(context.url, net)
+          if (attempt.viaProxy) context.url = original
+          const sticky = stickyPlaylists.get(original)
+          if (sticky) context.url = sticky
+          super.load(context, config, {
+            ...callbacks,
+            onSuccess: (response, stats, ctx, details) => {
+              const xhr = details as XMLHttpRequest | undefined
+              const final =
+                xhr?.getResponseHeader?.('X-Final-Url') || (xhr?.responseURL && !isProxied(xhr.responseURL, net) ? xhr.responseURL : '')
+              if (final && final !== original) stickyPlaylists.set(original, final)
+              callbacks.onSuccess(response, stats, ctx, details)
+            },
+            onError: (error, ctx, details, stats) => {
+              stickyPlaylists.delete(original)
+              callbacks.onError(error, ctx, details, stats)
+            },
+            onTimeout: (stats, ctx, details) => {
+              stickyPlaylists.delete(original)
+              callbacks.onTimeout(stats, ctx, details)
+            },
+          })
+        }
+      }
+
       const hls = new Hls({
         enableWorker: true,
         lowLatencyMode: false,
+        pLoader: StickyPlaylistLoader as unknown as PlaylistLoaderConstructor,
         backBufferLength: source.live ? 30 : 90,
+        maxBufferLength: 30,
+        liveSyncDurationCount: 3,
+        liveMaxLatencyDurationCount: 10,
         manifestLoadingMaxRetry: 1,
-        levelLoadingMaxRetry: 2,
-        fragLoadingMaxRetry: 3,
+        levelLoadingMaxRetry: 4,
+        fragLoadingMaxRetry: 6,
         xhrSetup: attempt.viaProxy
           ? (xhr, url) => {
               if (!url.startsWith(new URL(net.base, location.href).href)) xhr.open('GET', proxify(url, net, source.headers), true)
@@ -219,11 +308,15 @@ function startEngine(video: HTMLVideoElement, attempt: Attempt, source: PlayerSo
       { type: 'mpegts', isLive: source.live, url },
       {
         enableWorker: true,
-        enableStashBuffer: false,
-        stashInitialSize: 256 * 1024,
-        liveBufferLatencyChasing: source.live,
-        liveBufferLatencyMaxLatency: 8,
-        liveBufferLatencyMinRemain: 2,
+        // buffer de entrada absorve as oscilacoes da rede/proxy
+        enableStashBuffer: true,
+        stashInitialSize: 512 * 1024,
+        // sem "pular" para o ao vivo (causava engasgos); acelera de leve se atrasar demais
+        liveBufferLatencyChasing: false,
+        liveSync: source.live,
+        liveSyncMaxLatency: 20,
+        liveSyncTargetLatency: 10,
+        liveSyncPlaybackRate: 1.05,
         lazyLoad: false,
         autoCleanupSourceBuffer: true,
       },

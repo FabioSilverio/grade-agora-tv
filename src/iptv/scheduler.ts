@@ -3,6 +3,7 @@
 
 import { useSyncExternalStore } from 'react'
 import { getProgrammes } from './epg'
+import { isLocalActive } from './localService'
 import { activeRecordings, extendRecording, onRecordingDone, onTick, startRecording } from './recorder'
 import { computeOccurrences } from './schedule'
 import { store } from './state'
@@ -93,7 +94,8 @@ export async function runScheduler(options: { force?: boolean } = {}) {
 
     const activeIds = new Set(activeRecordings().map((info) => info.id))
     for (const occurrence of all) {
-      if (!leader) break
+      // Com o gravador do PC ativo, e ele quem grava (evita gravacao dupla).
+      if (!leader || isLocalActive()) break
       if (occurrence.start > now || occurrence.stop <= now) continue
 
       // Ja gravando esta ocorrencia (ou uma sobreposta da mesma regra, se a EPG mudou o horario)?

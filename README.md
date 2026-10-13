@@ -27,14 +27,23 @@ aberta/fechada original continua disponivel em `#/grade`.
 - **Horario fixo**: dias da semana + hora + duracao, sem depender da EPG.
 - Margens antes/depois configuraveis.
 
-Como funciona: o gravador roda num Web Worker (nao e pausado em aba de segundo plano), baixa o
-stream sem recodificar (segmentos HLS ou TS continuo, reconectando sozinho) e escreve no
-armazenamento do navegador (OPFS). Ao terminar, move o arquivo para a **pasta escolhida no PC**
-(Chrome/Edge). Arquivos `.ts` abrem no VLC; para `.mp4`: `ffmpeg -i in.ts -c copy out.mp4`.
+### Gravador do PC (grava com o site fechado)
 
-**Importante:** como e um site, as gravacoes acontecem no navegador. Deixe a aba aberta (pode
-ficar minimizada) e o PC sem suspender. Depois de reabrir o navegador, clique em
-"Autorizar pasta" (exigencia do navegador).
+O gravador do PC (`server/local`) roda escondido no seu computador, junto com o proxy local. O
+site sincroniza com ele os agendamentos; ele consulta a EPG sozinho, grava e salva os arquivos numa
+pasta do PC (padrao: `Videos\Grade Agora`). **Nao precisa deixar o site aberto** — so o PC ligado
+e com internet. Enquanto houver agendamentos ativos ele impede o Windows de suspender sozinho.
+
+No Windows, de dois cliques em `scripts\windows\instalar-proxy.cmd` (ou rode no PowerShell). Ele
+instala as dependencias, gera o gravador, inicia escondido e configura para iniciar com o Windows
+(se cair, reinicia). Depois, no site, em **Ajustes > Endereco do proxy**, use
+`http://127.0.0.1:8787/api/proxy`: o site detecta o gravador e passa a usa-lo. Log em
+`%LOCALAPPDATA%\GradeAgoraProxy.log`; estado em `%LOCALAPPDATA%\GradeAgora\estado.json`. Para
+remover: `scripts\windows\desinstalar-proxy.cmd`. Em outros sistemas: `npm run local`.
+
+Sem o gravador do PC, o site grava pelo proprio navegador (Web Worker + armazenamento do
+navegador, movendo para uma pasta escolhida no Chrome/Edge) — nesse modo a aba precisa ficar
+aberta. Arquivos `.ts` abrem no VLC; para `.mp4`: `ffmpeg -i in.ts -c copy out.mp4`.
 
 ### Proxy (`/api/proxy`)
 
@@ -43,20 +52,9 @@ pode acessar. A funcao `api/proxy.js` repassa as requisicoes (com User-Agent de 
 e reescreve playlists HLS. Ela recusa uso por outros sites e hosts de rede privada.
 
 Limites da Vercel: cada requisicao dura no maximo 5 min (o player e o gravador reconectam
-sozinhos; HLS quase nao sente) e todo o video passa pela sua cota de trafego. Para gravar
-muito, rode o proxy no proprio PC:
-
-```bash
-npm run proxy   # http://127.0.0.1:8787/api/proxy
-```
-
-e em **Ajustes > Endereco do proxy** use `http://127.0.0.1:8787/api/proxy`. Alguns provedores
-recusam video para IPs de datacenter (erro HTTP 520/403 no player); com o proxy local o video sai
-do seu IP, como no VLC.
-
-No Windows, de dois cliques em `scripts\windows\instalar-proxy.cmd`: o proxy passa a rodar
-escondido e a iniciar sozinho com o Windows (se cair, reinicia). Log em
-`%LOCALAPPDATA%\GradeAgoraProxy.log`. Para remover: `scripts\windows\desinstalar-proxy.cmd`.
+sozinhos) e todo o video passa pela sua cota de trafego. Alguns provedores tambem recusam video
+para IPs de datacenter (erro HTTP 520/403 no player). Por isso o recomendado e usar o proxy do
+gravador do PC (`http://127.0.0.1:8787/api/proxy`): o video sai do seu IP, como no VLC.
 
 Audio AC-3/Dolby nao toca no Chrome (limitacao do navegador); o Edge costuma tocar. A gravacao
 funciona em qualquer caso.

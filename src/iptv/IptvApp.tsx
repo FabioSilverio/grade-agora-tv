@@ -21,7 +21,9 @@ import { ScheduleView } from './components/ScheduleView'
 import { SettingsView } from './components/SettingsView'
 import { MoviesView, SeriesView } from './components/VodView'
 import { warmEpg } from './epg'
-import { isActive, refreshFolderState, useFolderState, useRecordings } from './recorder'
+import { useActiveRecordings } from './activeRecordings'
+import { initLocalService, useLocalService } from './localService'
+import { refreshFolderState, useFolderState } from './recorder'
 import { initScheduler } from './scheduler'
 import { store, useAppState } from './state'
 import { usePlaylistData } from './hooks'
@@ -51,12 +53,15 @@ export function IptvApp() {
   const activeId = useAppState((state) => state.activePlaylistId)
   const { data, loading, error, reload } = usePlaylistData(activeId)
   const [channelId, setChannelId] = useState<string | null>(() => (activeId ? localStorage.getItem(`iptv:last:${activeId}`) : null))
-  const recordings = useRecordings()
+  const activeRecordings = useActiveRecordings()
+  const local = useLocalService()
   const folder = useFolderState()
-  const recordingCount = recordings.filter(isActive).length
+  const recordingCount = activeRecordings.length
+  const browserRecording = activeRecordings.some((item) => item.where === 'browser')
 
   useEffect(() => {
     initScheduler()
+    initLocalService()
     void refreshFolderState()
     const onHash = () => setTabState(tabFromHash())
     window.addEventListener('hashchange', onHash)
@@ -138,10 +143,10 @@ export function IptvApp() {
 
       {recordingCount > 0 && tab !== 'recordings' && (
         <button type="button" className="tv-rec-banner" onClick={() => setTab('recordings')}>
-          <span className="tv-rec-dot" /> {recordingCount} gravacao(oes) em andamento — mantenha esta aba aberta
+          <span className="tv-rec-dot" /> {recordingCount} gravacao(oes) em andamento{browserRecording ? ' — mantenha esta aba aberta' : ' no gravador do PC'}
         </button>
       )}
-      {folder.name && folder.permission === 'prompt' && store.get().rules.some((rule) => rule.enabled) && (
+      {!local.available && folder.name && folder.permission === 'prompt' && store.get().rules.some((rule) => rule.enabled) && (
         <button type="button" className="tv-rec-banner warn" onClick={() => setTab('recordings')}>
           A pasta de gravacoes precisa ser reautorizada. Clique aqui.
         </button>

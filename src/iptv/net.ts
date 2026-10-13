@@ -26,6 +26,16 @@ export function isProxied(url: string, config: NetConfig) {
   return url.startsWith(new URL(config.base, self.location.href).href)
 }
 
+/** Desfaz proxify(): devolve a URL original do servidor IPTV. */
+export function unproxy(url: string, config: NetConfig) {
+  if (!isProxied(url, config)) return url
+  try {
+    return new URL(url).searchParams.get('url') || url
+  } catch {
+    return url
+  }
+}
+
 function hostOf(url: string) {
   try {
     return new URL(url).host

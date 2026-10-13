@@ -54,3 +54,17 @@ export function toChannelRef(playlistId: string, channel: Channel): ChannelRef {
     headers: channel.headers,
   }
 }
+
+/** Nome do arquivo de gravacao (sem extensao): "Titulo - Canal - 2026-10-13 21h00". */
+export function recordingFileBase(channel: string, title: string, when: Date) {
+  const pad = (value: number) => String(value).padStart(2, '0')
+  const stamp = `${when.getFullYear()}-${pad(when.getMonth() + 1)}-${pad(when.getDate())} ${pad(when.getHours())}h${pad(when.getMinutes())}`
+  const clean = (value: string) =>
+    value
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\\/:*?"<>|\u0000-\u001f]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 80)
+  return [clean(title), clean(channel), stamp].filter(Boolean).join(' - ')
+}

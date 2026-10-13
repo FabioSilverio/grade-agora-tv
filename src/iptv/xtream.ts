@@ -206,34 +206,40 @@ export class XtreamClient {
 
   /** EPG completa do canal (get_simple_data_table), com titulos em base64. */
   async channelEpg(streamId: number, signal?: AbortSignal): Promise<Programme[]> {
-    type Listing = {
-      title?: string
-      description?: string
-      start_timestamp?: string | number
-      stop_timestamp?: string | number
-      start?: string
-      end?: string
+    const data = await this.api<EpgResponse>('get_simple_data_table', { stream_id: streamId }, signal)
+    let list = parseEpgListings(data)
+    if (!list.length) {
+      const short = await this.api<EpgResponse>('get_short_epg', { stream_id: streamId, limit: 50 }, signal).catch(() => null)
+      list = parseEpgListings(short)
     }
-    const data = await this.api<{ epg_listings?: Listing[] }>('get_simple_data_table', { stream_id: streamId }, signal)
-    let listings = data?.epg_listings
-    if (!Array.isArray(listings) || !listings.length) {
-      const short = await this.api<{ epg_listings?: Listing[] }>('get_short_epg', { stream_id: streamId, limit: 50 }, signal).catch(
-        () => null,
-      )
-      listings = short?.epg_listings
-    }
-    if (!Array.isArray(listings)) return []
-
-    return listings
-      .map((item) => ({
-        start: Number(item.start_timestamp) * 1000 || Date.parse(item.start ?? ''),
-        stop: Number(item.stop_timestamp) * 1000 || Date.parse(item.end ?? ''),
-        title: decodeB64(item.title ?? '') || 'Sem titulo',
-        desc: decodeB64(item.description ?? '').slice(0, 400) || undefined,
-      }))
-      .filter((item) => Number.isFinite(item.start) && Number.isFinite(item.stop) && item.stop > item.start)
-      .sort((a, b) => a.start - b.start)
+    return list
   }
+}
+
+type EpgResponse = {
+  epg_listings?: Array<{
+    title?: string
+    description?: string
+    start_timestamp?: string | number
+    stop_timestamp?: string | number
+    start?: string
+    end?: string
+  }>
+} | null
+
+/** Converte a resposta de get_simple_data_table/get_short_epg em programas. */
+export function parseEpgListings(data: EpgResponse): Programme[] {
+  const listings = data?.epg_listings
+  if (!Array.isArray(listings)) return []
+  return listings
+    .map((item) => ({
+      start: Number(item.start_timestamp) * 1000 || Date.parse(item.start ?? ''),
+      stop: Number(item.stop_timestamp) * 1000 || Date.parse(item.end ?? ''),
+      title: decodeB64(item.title ?? '') || 'Sem titulo',
+      desc: decodeB64(item.description ?? '').slice(0, 400) || undefined,
+    }))
+    .filter((item) => Number.isFinite(item.start) && Number.isFinite(item.stop) && item.stop > item.start)
+    .sort((a, b) => a.start - b.start)
 }
 
 function decodeB64(value: string) {

@@ -1561,3 +1561,21 @@
     max-height: 40vh;
   }
 }
+
+.tv-ok-box {
+  border-color: color-mix(in srgb, var(--tv-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--tv-accent) 7%, var(--tv-panel));
+}
+
+.tv-ok-box h3 svg {
+  color: var(--tv-accent);
+}
+
+details.tv-card summary {
+  cursor: pointer;
+  color: var(--tv-muted);
+}
+
+.tv-embedded {
+  padding: 16px 0 0;
+}

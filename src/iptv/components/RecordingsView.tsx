@@ -21,6 +21,8 @@ import type { RecordingInfo } from '../types'
 import { fmtBytes, fmtDateTime, fmtDuration } from '../format'
 import { useNow } from '../hooks'
 import { Empty } from '../ui'
+import { LOCAL_BASE, checkLocal, useLocalService } from '../localService'
+import { LocalRecordingsView } from './LocalRecordingsView'
 import type { PlayerSource } from './Player'
 import { PlayerModal } from './VodView'
 
@@ -102,6 +104,20 @@ export function FolderCard() {
 }
 
 export function RecordingsView() {
+  const local = useLocalService()
+  if (!local.available) return <BrowserRecordingsView />
+  return (
+    <div className="tv-page">
+      <LocalRecordingsView />
+      <details className="tv-card">
+        <summary>Gravacoes feitas pelo navegador (antigas)</summary>
+        <BrowserRecordingsView embedded />
+      </details>
+    </div>
+  )
+}
+
+function BrowserRecordingsView({ embedded = false }: { embedded?: boolean }) {
   const recordings = useRecordings()
   const now = useNow(1000)
   const [files, setFiles] = useState<StoredFile[]>([])
@@ -183,7 +199,8 @@ export function RecordingsView() {
   }
 
   return (
-    <div className="tv-page">
+    <div className={embedded ? 'tv-page tv-embedded' : 'tv-page'}>
+      {!embedded && <LocalHint />}
       <section>
         <h2>Gravando agora</h2>
         {!active.length && <p className="tv-muted">Nenhuma gravacao em andamento.</p>}
@@ -301,6 +318,34 @@ export function RecordingsView() {
           }}
         />
       )}
+    </div>
+  )
+}
+
+/** Sugere instalar o gravador do PC (grava com o site fechado). */
+function LocalHint() {
+  const [checking, setChecking] = useState(false)
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className="tv-warn-box">
+      <TriangleAlert size={18} />
+      <span>
+        Sem o gravador do PC, as gravacoes so acontecem com esta aba aberta. Para gravar com o site fechado, instale o gravador no PC
+        (no Windows: <code>scripts\windows\instalar-proxy.cmd</code> do projeto) e clique em{' '}
+        <button
+          type="button"
+          className="tv-btn small"
+          disabled={checking}
+          onClick={async () => {
+            setChecking(true)
+            setFailed(!(await checkLocal(true)))
+            setChecking(false)
+          }}
+        >
+          Conectar ao gravador do PC
+        </button>
+        {failed && <span className="tv-error"> Nao encontrei o gravador em {LOCAL_BASE}.</span>}
+      </span>
     </div>
   )
 }

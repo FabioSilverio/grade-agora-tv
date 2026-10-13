@@ -1,10 +1,9 @@
-// Gravador: roda num Web Worker para nao sofrer o "throttling" de abas em
-// segundo plano. Baixa o stream (HLS segmento a segmento, ou MPEG-TS continuo),
-// grava direto no disco do navegador (OPFS) e, ao terminar, move o arquivo para
-// a pasta escolhida pelo usuario.
+// Gravador do navegador: roda num Web Worker para nao sofrer o "throttling" de abas
+// em segundo plano. Usa o motor compartilhado (recordCore), grava no disco do
+// navegador (OPFS) e, ao terminar, move o arquivo para a pasta escolhida.
 
-import { decryptSegment, parseHls, type HlsSegment, type MediaPlaylist } from './hls'
-import { HttpError, smartFetch, type NetConfig } from './net'
+import { smartFetch, type NetConfig } from './net'
+import { detectFormat, StreamRecorder } from './recordCore'
 import type { RecordingInfo, StreamHeaders } from './types'
 
 export type RecordJob = {
@@ -40,15 +39,11 @@ type Writer = { write(data: Uint8Array): Promise<void>; close(): Promise<void> }
 type Rec = {
   job: RecordJob
   info: RecordingInfo
-  controller: AbortController
-  stopped: boolean
+  recorder: StreamRecorder
+  stoppedByUser: boolean
   writer?: Writer
   opfsName?: string
-  lastSeq: number
-  lastMap?: string
-  keys: Map<string, ArrayBuffer>
   lastPost: number
-  wake?: () => void
 }
 
 const ctx = self as unknown as {
@@ -60,34 +55,21 @@ const recs = new Map<string, Rec>()
 ctx.onmessage = (event: MessageEvent<WorkerIn>) => {
   const message = event.data
   if (message.type === 'start') void start(message.job)
+  const rec = 'id' in message ? recs.get(message.id) : undefined
+  if (!rec) return
   if (message.type === 'stop') {
-    const rec = recs.get(message.id)
-    if (rec) stop(rec, 'stopped')
+    rec.stoppedByUser = true
+    rec.recorder.stop()
   }
   if (message.type === 'extend') {
-    const rec = recs.get(message.id)
-    if (rec) {
-      rec.job.stopAt = message.stopAt
-      rec.info.stopAt = message.stopAt
-      post(rec, true)
-    }
+    rec.job.stopAt = message.stopAt
+    rec.info.stopAt = message.stopAt
+    post(rec, true)
   }
 }
 
 // Relogio do agendador: timers de worker nao sao estrangulados em abas ocultas.
 setInterval(() => ctx.postMessage({ type: 'tick' } satisfies WorkerOut), 10_000)
-setInterval(() => {
-  const now = Date.now()
-  for (const rec of recs.values()) if (!rec.stopped && now >= rec.job.stopAt) stop(rec, 'done')
-}, 1000)
-
-function stop(rec: Rec, status: 'done' | 'stopped') {
-  if (rec.stopped) return
-  rec.stopped = true
-  rec.info.status = status === 'done' ? 'finishing' : 'stopped'
-  rec.controller.abort()
-  rec.wake?.()
-}
 
 function post(rec: Rec, force = false) {
   const now = Date.now()
@@ -95,23 +77,6 @@ function post(rec: Rec, force = false) {
   rec.lastPost = now
   ctx.postMessage({ type: 'update', info: { ...rec.info } } satisfies WorkerOut)
 }
-
-function setStatus(rec: Rec, status: RecordingInfo['status'], message?: string) {
-  rec.info.status = status
-  rec.info.message = message
-  post(rec, true)
-}
-
-const sleep = (rec: Rec, ms: number) =>
-  new Promise<void>((resolve) => {
-    const timer = setTimeout(done, ms)
-    function done() {
-      clearTimeout(timer)
-      rec.wake = undefined
-      resolve()
-    }
-    rec.wake = done
-  })
 
 async function start(job: RecordJob) {
   if (recs.has(job.id)) return
@@ -128,153 +93,32 @@ async function start(job: RecordJob) {
       bytes: 0,
       status: 'starting',
     },
-    controller: new AbortController(),
-    stopped: false,
-    lastSeq: -1,
-    keys: new Map(),
+    stoppedByUser: false,
     lastPost: 0,
+    recorder: undefined as unknown as StreamRecorder,
   }
+  rec.recorder = new StreamRecorder({
+    urls: job.urls,
+    hlsQuality: job.hlsQuality,
+    getStopAt: () => job.stopAt,
+    fetch: (url, signal) => smartFetch(url, job.net, { signal }, job.headers),
+    onStatus: (status, message) => {
+      rec.info.status = status
+      rec.info.message = message
+      post(rec, true)
+    },
+    write: (data) => write(rec, data),
+  })
   recs.set(job.id, rec)
   post(rec, true)
-
-  let failures = 0
-  let urlIndex = 0
-  while (!rec.stopped && Date.now() < job.stopAt) {
-    const url = job.urls[urlIndex % job.urls.length]
-    const before = rec.info.bytes
-    try {
-      await recordFrom(rec, url)
-      if (!rec.stopped) setStatus(rec, 'reconnecting', 'O servidor encerrou a conexao, reconectando...')
-    } catch (error) {
-      if (rec.stopped) break
-      const message = error instanceof Error ? error.message : String(error)
-      setStatus(rec, 'reconnecting', `Falha: ${message}. Tentando de novo...`)
-    }
-    if (rec.stopped) break
-    failures = rec.info.bytes > before ? 0 : failures + 1
-    // Depois de 2 falhas seguidas na mesma URL, tenta a alternativa (.m3u8 <-> .ts).
-    if (failures > 0 && failures % 2 === 0) urlIndex += 1
-    rec.controller = new AbortController()
-    await sleep(rec, Math.min(15_000, 1000 + failures * 2000))
-  }
-
+  await rec.recorder.run()
+  if (rec.stoppedByUser) rec.info.status = 'stopped'
   await finish(rec)
-}
-
-async function recordFrom(rec: Rec, url: string) {
-  const { response, finalUrl } = await smartFetch(url, rec.job.net, { signal: rec.controller.signal }, rec.job.headers)
-  if (!response.ok || !response.body) throw new HttpError(response.status, `HTTP ${response.status}`)
-
-  const reader = response.body.getReader()
-  const first = await reader.read()
-  if (first.done || !first.value) throw new Error('stream vazio')
-
-  const head = new TextDecoder().decode(first.value.slice(0, 16)).trimStart()
-  if (head.startsWith('#EXTM3U')) {
-    let text = new TextDecoder().decode(first.value)
-    for (;;) {
-      const { done, value } = await reader.read()
-      if (done) break
-      text += new TextDecoder().decode(value)
-    }
-    await recordHls(rec, url, text, finalUrl)
-    return
-  }
-
-  setStatus(rec, 'recording')
-  await write(rec, first.value)
-  for (;;) {
-    const { done, value } = await reader.read()
-    if (done || rec.stopped) break
-    await write(rec, value)
-  }
-}
-
-async function recordHls(rec: Rec, requestUrl: string, text: string, baseUrl: string) {
-  let playlistUrl = requestUrl
-  let parsed = parseHls(text, baseUrl)
-  if (parsed.kind === 'master') {
-    const variants = [...parsed.variants].sort((a, b) => a.bandwidth - b.bandwidth)
-    const variant = rec.job.hlsQuality === 'lowest' ? variants[0] : variants[variants.length - 1]
-    if (!variant) throw new Error('playlist HLS sem variantes')
-    playlistUrl = variant.uri
-    parsed = await loadMedia(rec, playlistUrl)
-  }
-
-  setStatus(rec, 'recording')
-  let playlist = parsed as MediaPlaylist
-  let stale = 0
-  while (!rec.stopped) {
-    const segments = playlist.segments
-    const newest = segments[segments.length - 1]
-    let pending: HlsSegment[]
-    if (rec.lastSeq < 0 || (newest && newest.seq < rec.lastSeq - 10)) {
-      // inicio (ou stream reiniciado): comeca perto do ao vivo
-      pending = segments.slice(-3)
-    } else {
-      pending = segments.filter((segment) => segment.seq > rec.lastSeq)
-    }
-
-    for (const segment of pending) {
-      if (rec.stopped) return
-      if (segment.map && segment.map !== rec.lastMap) {
-        await write(rec, new Uint8Array(await fetchBytes(rec, segment.map)))
-        rec.lastMap = segment.map
-      }
-      let data = await fetchBytes(rec, segment.uri)
-      if (segment.key?.method === 'AES-128' && segment.key.uri) {
-        let key = rec.keys.get(segment.key.uri)
-        if (!key) {
-          key = await fetchBytes(rec, segment.key.uri)
-          rec.keys.set(segment.key.uri, key)
-        }
-        data = await decryptSegment(data, key, segment.key, segment.seq)
-      }
-      await write(rec, new Uint8Array(data))
-      rec.lastSeq = segment.seq
-    }
-
-    if (playlist.endList) return
-    stale = pending.length ? 0 : stale + 1
-    if (stale > 20) throw new Error('playlist HLS parou de atualizar')
-    const waitMs = Math.min(6000, Math.max(1000, (playlist.targetDuration * 1000) / 2))
-    await sleep(rec, waitMs)
-    if (rec.stopped) return
-    playlist = await loadMedia(rec, playlistUrl)
-  }
-}
-
-async function loadMedia(rec: Rec, url: string): Promise<MediaPlaylist> {
-  const { response, finalUrl } = await smartFetch(url, rec.job.net, { signal: rec.controller.signal }, rec.job.headers)
-  if (!response.ok) throw new HttpError(response.status, `playlist HTTP ${response.status}`)
-  const parsed = parseHls(await response.text(), finalUrl)
-  if (parsed.kind !== 'media') throw new Error('playlist HLS inesperada')
-  return parsed
-}
-
-async function fetchBytes(rec: Rec, url: string) {
-  for (let attempt = 0; ; attempt += 1) {
-    try {
-      const { response } = await smartFetch(url, rec.job.net, { signal: rec.controller.signal }, rec.job.headers)
-      if (!response.ok) throw new HttpError(response.status, `segmento HTTP ${response.status}`)
-      return await response.arrayBuffer()
-    } catch (error) {
-      if (rec.stopped || attempt >= 2) throw error
-      await sleep(rec, 800)
-    }
-  }
 }
 
 // ---------- escrita ----------
 
-function detectFormat(bytes: Uint8Array): 'ts' | 'mp4' {
-  const box = String.fromCharCode(...bytes.slice(4, 8))
-  if (['ftyp', 'styp', 'moof', 'moov', 'sidx'].includes(box)) return 'mp4'
-  return 'ts'
-}
-
 async function write(rec: Rec, data: Uint8Array) {
-  if (!data.byteLength) return
   if (!rec.writer) {
     const format = detectFormat(data)
     rec.info.format = format

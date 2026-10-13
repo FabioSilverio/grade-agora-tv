@@ -2,6 +2,7 @@ import { useSyncExternalStore } from 'react'
 import { channelCandidates } from './playlists'
 import type { RecordJob, WorkerIn, WorkerOut } from './recorder.worker'
 import { netConfig, store } from './state'
+import { recordingFileBase as fileBase } from './format'
 import { idb, loadLocal, saveLocal, uid } from './storage'
 import type { ChannelRef, RecordingInfo } from './types'
 
@@ -131,19 +132,6 @@ export function stopRecording(id: string) {
 
 export function extendRecording(id: string, stopAt: number) {
   send({ type: 'extend', id, stopAt })
-}
-
-function fileBase(channel: string, title: string, when: Date) {
-  const pad = (value: number) => String(value).padStart(2, '0')
-  const stamp = `${when.getFullYear()}-${pad(when.getMonth() + 1)}-${pad(when.getDate())} ${pad(when.getHours())}h${pad(when.getMinutes())}`
-  const clean = (value: string) =>
-    value
-      // eslint-disable-next-line no-control-regex
-      .replace(/[\\/:*?"<>|\u0000-\u001f]+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim()
-      .slice(0, 80)
-  return [clean(title), clean(channel), stamp].filter(Boolean).join(' - ')
 }
 
 // ---------- pasta de gravacoes (File System Access API) ----------

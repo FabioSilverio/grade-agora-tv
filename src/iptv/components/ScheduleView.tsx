@@ -1,5 +1,6 @@
-import { CalendarClock, Pencil, Plus, Trash2, TriangleAlert } from 'lucide-react'
+import { CalendarClock, CheckCircle2, Pencil, Plus, Trash2, TriangleAlert } from 'lucide-react'
 import { isActive, useFolderState, useRecordings } from '../recorder'
+import { useLocalService } from '../localService'
 import { ruleError, useIsLeader, useUpcoming } from '../scheduler'
 import { store, useAppState } from '../state'
 import type { RecordingRule } from '../types'
@@ -25,7 +26,10 @@ function describeRule(rule: RecordingRule) {
 export function ScheduleView() {
   const rules = useAppState((state) => state.rules)
   const playlists = useAppState((state) => state.playlists)
-  const upcoming = useUpcoming()
+  const browserUpcoming = useUpcoming()
+  const local = useLocalService()
+  // Com o gravador do PC ativo, mostra o plano dele (e ele quem grava).
+  const upcoming = local.available && local.recordings ? local.recordings.upcoming : browserUpcoming
   const recordings = useRecordings()
   const folder = useFolderState()
   const leader = useIsLeader()
@@ -37,20 +41,37 @@ export function ScheduleView() {
     store.set((state) => ({ rules: state.rules.filter((item) => item.id !== rule.id) }))
   }
 
-  const activeKeys = new Set(recordings.filter(isActive).map((item) => item.occurrenceKey))
+  const activeKeys = new Set([
+    ...recordings.filter(isActive).map((item) => item.occurrenceKey),
+    ...(local.recordings?.active ?? []).map((item) => item.occurrenceKey),
+  ])
 
   return (
     <div className="tv-page">
+      {local.available ? (
+        <div className="tv-card tv-ok-box">
+          <h3>
+            <CheckCircle2 size={18} /> Gravador do PC ativo — pode fechar o site
+          </h3>
+          <p>
+            Os agendamentos abaixo ja foram enviados ao gravador do seu PC
+            {local.status?.syncedAt ? ` (sincronizado ${fmtTime(local.status.syncedAt)})` : ''}. Ele consulta a EPG e grava sozinho
+            em <code>{local.status?.outputDir}</code>. So precisa do PC ligado e com internet.
+          </p>
+        </div>
+      ) : (
       <div className="tv-warn-box">
         <TriangleAlert size={18} />
         <span>
           As gravacoes acontecem <strong>neste navegador</strong>: deixe esta aba aberta (pode ficar minimizada) e o PC ligado,
           sem suspender. Em Configuracoes de energia do Windows, ajuste “Suspender” para “Nunca” enquanto houver gravacoes.
-          {folder.name && folder.permission !== 'granted' && ' A pasta de gravacoes precisa ser reautorizada (aba Gravacoes).'}
+          {folder.name && folder.permission !== 'granted' && ' A pasta de gravacoes precisa ser reautorizada (aba Gravacoes).'} Para
+          gravar com o site fechado, instale o gravador do PC (aba Gravacoes).
         </span>
       </div>
+      )}
 
-      {!leader && (
+      {!leader && !local.available && (
         <div className="tv-warn-box">
           <TriangleAlert size={18} />
           <span>O app esta aberto em outra aba: e ela que faz as gravacoes. Feche as abas extras para evitar confusao.</span>
