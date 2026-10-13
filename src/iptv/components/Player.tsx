@@ -1,6 +1,7 @@
 import { Loader2, Maximize, PictureInPicture2, TriangleAlert } from 'lucide-react'
 import type { PlaylistLoaderConstructor } from 'hls.js'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { diagnoseUrls, type Diagnosis } from '../diagnose'
 import { isProxied, mustProxy, proxify, unproxy, type NetConfig } from '../net'
 import { netConfig, useAppState } from '../state'
 import type { StreamHeaders } from '../types'
@@ -52,7 +53,15 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const settings = useAppState((state) => state.settings)
-  const [status, setStatus] = useState<{ state: 'idle' | 'loading' | 'playing' | 'error'; message?: string }>({ state: 'idle' })
+  const [status, setStatus] = useState<{
+    state: 'idle' | 'loading' | 'playing' | 'error'
+    message?: string
+    detail?: string
+    /** Tocando, mas com problema (ex.: so audio). */
+    warning?: string
+  }>({
+    state: 'idle',
+  })
 
   useEffect(() => {
     const video = videoRef.current
@@ -70,6 +79,7 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
 
     let played = false
     let retries = 0
+    let diagnosis: Promise<Diagnosis | null> | null = null
     let stallTimer: ReturnType<typeof setTimeout> | undefined
 
     const start = (attempt: Attempt) => {
@@ -93,7 +103,12 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
       if (!attempt) {
         cleanup?.()
         cleanup = null
-        setStatus({ state: 'error', message: explain(errors) })
+        const technical = errors.slice(-2).join(' | ')
+        setStatus({ state: 'error', message: 'Verificando por que o canal nao toca...', detail: technical })
+        // Inspeciona o stream para explicar o motivo (codec, pagina de erro, HTTP...).
+        void (diagnosis ??= diagnoseUrls(source.urls, net, source.headers)).then(
+          (result) => !cancelled && setStatus({ state: 'error', message: result?.message ?? explain(errors), detail: technical }),
+        )
         return
       }
       start(attempt)
@@ -102,6 +117,19 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
     const onFail = (reason: string) => {
       if (cancelled) return
       errors.push(reason)
+      if (!played && !diagnosis) {
+        // Ja na primeira falha, descobre o formato: se o navegador nao toca o codec,
+        // para de tentar e explica (sem esperar todas as tentativas).
+        diagnosis = diagnoseUrls(source.urls, net, source.headers)
+        void diagnosis.then((result) => {
+          if (cancelled || !result?.blocked || played) return
+          cancelled = true
+          clearTimeout(timer)
+          cleanup?.()
+          cleanup = null
+          setStatus({ state: 'error', message: result.message, detail: errors.slice(-2).join(' | ') })
+        })
+      }
       // Ja estava tocando: e queda momentanea, reconecta a mesma fonte em vez de trocar de formato.
       if ((played || retries > 0) && retries < MAX_RETRIES) {
         retries += 1
@@ -118,12 +146,26 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
       clearTimeout(stallTimer)
       if (!played) {
         played = true
+        // Tocando sem imagem (ex.: video MPEG-2/HEVC com audio suportado): explica.
+        setTimeout(() => {
+          if (cancelled || !played || video.videoWidth > 0 || source.engine) return
+          void (diagnosis ??= diagnoseUrls(source.urls, net, source.headers)).then((result) => {
+            const videoBlocked = result?.codecs?.some((codec) => codec.kind === 'video' && result.blocked)
+            if (!cancelled && video.videoWidth === 0)
+              setStatus((current) => ({
+                ...current,
+                warning: videoBlocked
+                  ? `So o audio esta tocando. ${result?.message ?? ''}`
+                  : 'So o audio esta tocando (este canal pode ser apenas de radio).',
+              }))
+          })
+        }, 5000)
         // 1 min tocando sem erro zera o contador de reconexoes
         setTimeout(() => {
           if (played && !cancelled) retries = 0
         }, 60_000)
       }
-      setStatus({ state: 'playing' })
+      setStatus((current) => ({ state: 'playing', warning: current.state === 'playing' ? current.warning : undefined }))
     }
     // Travou (buffer vazio) por muito tempo num ao vivo: reconecta.
     const onWaiting = () => {
@@ -196,10 +238,12 @@ export function Player({ source, actions }: { source: PlayerSource | null; actio
           <span>{status.message}</span>
         </div>
       )}
+      {source && status.state === 'playing' && status.warning && <div className="tv-player-warning">{status.warning}</div>}
       {source && status.state === 'error' && (
         <div className="tv-player-msg error">
           <TriangleAlert size={28} />
           <span>{status.message}</span>
+          {status.detail && <small className="tv-player-detail">Detalhe tecnico: {status.detail}</small>}
         </div>
       )}
     </div>
