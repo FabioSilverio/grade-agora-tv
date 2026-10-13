@@ -207,7 +207,7 @@ function PlaylistForm({ initial, onDone, onCancel, canCancel }: { initial: Form;
       {form.kind === 'xtream' ? (
         <>
           <label className="tv-field">
-            <span>Servidor (URL com porta)</span>
+            <span>Servidor (URL; a porta so se o provedor informar)</span>
             <input value={form.server} onChange={(event) => update({ server: event.target.value })} placeholder="http://servidor.com:8080" />
           </label>
           <div className="tv-row">
