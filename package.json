@@ -7,10 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "proxy": "node server/local-proxy.mjs",
+    "test": "node --test --experimental-strip-types tests/*.test.ts"
   },
   "dependencies": {
+    "hls.js": "^1.6.15",
     "lucide-react": "^1.17.0",
+    "mpegts.js": "^1.8.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
