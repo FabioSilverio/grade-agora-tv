@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?><tv date="20261018">
+<?xml version="1.0" encoding="UTF-8" ?><tv date="20261019">
 <channel id="PremiereClubes.br@SD"><display-name>Premiere Clubes</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Premiere_(2017)_logo.png/960px-Premiere_(2017)_logo.png"/></channel>
 <channel id="Combate.br@SD"><display-name>Combate</display-name><icon src="https://i.imgur.com/ZPYK5jr.png"/></channel>
 <channel id="LifetimeLatinAmerica.us@Brazil"><display-name>Lifetime</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Logo_Lifetime_2020.svg/960px-Logo_Lifetime_2020.svg.png"/></channel>
@@ -31,7 +31,7 @@
 <channel id="ELatinAmerica.us@Brazil"><display-name>E! Entertainment Television</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/E%21_Logo_2012.svg/500px-E%21_Logo_2012.svg.png"/></channel>
 <channel id="ESPN.br@SD"><display-name>ESPN Brasil</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png"/></channel>
 <channel id="TVEscola.br@SD"><display-name>TV Escola</display-name><icon src="https://i.imgur.com/OF6aGQj.png"/></channel>
-<channel id="ESPN.us@SD"><display-name>ESPN</display-name><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/960px-ESPN_wordmark.svg.png"/></channel>
+<channel id="ESPN.us@SD"><display-name>ESPN</display-name><icon src="https://imgx.fubo.tv/station_logos/espn-hd_c.png"/></channel>
 <channel id="Eurochannel.uk@SD"><display-name>Eurochannel</display-name><icon src="https://i.imgur.com/yXAtmI6.png"/></channel>
 <channel id="FoxSports2.br@SD"><display-name>Fox Sports 2</display-name><icon src="https://i.imgur.com/VbPBoYF.png"/></channel>
 <channel id="FoxSports.br@SD"><display-name>Fox Sports</display-name><icon src="https://i.imgur.com/xO5JwDQ.png"/></channel>
